@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT vs VWRA 投資比較分析</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292f;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .etf-card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .etf-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            pointer-events: none;
+        }
+
+        .vt-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .vwra-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .etf-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .etf-card .flag {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .metric {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .metric strong {
+            display: inline-block;
+            min-width: 120px;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        .positive {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .performance-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .performance-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .performance-item h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .performance-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .vt-value {
+            color: #667eea;
+        }
+
+        .vwra-value {
+            color: #f5576c;
+        }
+
+        .winner {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .conclusion ul {
+            list-style: none;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .conclusion li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .conclusion li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #00b894;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .performance-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VT vs VWRA</h1>
+            <p>全球股票ETF投資比較分析</p>
+        </div>
+
+        <!-- 基本比較 -->
+        <div class="card">
+            <h2>📊 基本架構比較</h2>
+            <div class="comparison-grid">
+                <div class="etf-card vt-card">
+                    <div class="flag">🇺🇸</div>
+                    <h3>VT</h3>
+                    <div class="metric"><strong>註冊地：</strong>美國</div>
+                    <div class="metric"><strong>法規框架：</strong>SEC規範</div>
+                    <div class="metric"><strong>管理費：</strong>0.07%</div>
+                    <div class="metric"><strong>預扣稅：</strong>30%</div>
+                    <div class="metric"><strong>遺產稅：</strong>有風險</div>
+                </div>
+                <div class="etf-card vwra-card">
+                    <div class="flag">🇮🇪</div>
+                    <h3>VWRA</h3>
+                    <div class="metric"><strong>註冊地：</strong>愛爾蘭</div>
+                    <div class="metric"><strong>法規框架：</strong>UCITS規範</div>
+                    <div class="metric"><strong>管理費：</strong>0.22%</div>
+                    <div class="metric"><strong>預扣稅：</strong>0%</div>
+                    <div class="metric"><strong>遺產稅：</strong>無風險</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 稅務負擔比較 -->
+        <div class="card">
+            <h2>💰 台灣投資者稅務負擔比較</h2>
+            <div class="highlight-box">
+                <h3>總有效稅率</h3>
+                <div class="performance-comparison">
+                    <div class="performance-item">
+                        <h4>VT</h4>
+                        <div class="performance-value vt-value">33.67%</div>
+                        <small>雙重課稅</small>
+                    </div>
+                    <div class="performance-item winner">
+                        <h4>VWRA</h4>
+                        <div class="performance-value">15%</div>
+                        <small>單層課稅</small>
+                    </div>
+                    <div class="performance-item">
+                        <h4>稅務節省</h4>
+                        <div class="performance-value positive">18.67%</div>
+                        <small>VWRA優勢</small>
+                    </div>
+                </div>
+            </div>
+
+            <h3>各國股息預扣稅率</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>市場/國家</th>
+                        <th>VT稅率</th>
+                        <th>VWRA稅率</th>
+                        <th>差異</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🇺🇸 美國</td>
+                        <td>-</td>
+                        <td>15%</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>🇬🇧 英國</td>
+                        <td>15%</td>
+                        <td>0%</td>
+                        <td class="positive">-15%</td>
+                    </tr>
+                    <tr>
+                        <td>🇩🇪 德國</td>
+                        <td>15%</td>
+                        <td>15%</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>🇯🇵 日本</td>
+                        <td>10%</td>
+                        <td>15%</td>
+                        <td class="negative">+5%</td>
+                    </tr>
+                    <tr>
+                        <td>🇸🇬 新加坡</td>
+                        <td>30%</td>
+                        <td>15%</td>
+                        <td class="positive">-15%</td>
+                    </tr>
+                    <tr>
+                        <td>🇹🇼 台灣</td>
+                        <td>30%</td>
+                        <td>20%</td>
+                        <td class="positive">-10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 成本比較 -->
+        <div class="card">
+            <h2>📈 年度持有成本比較（假設股息率2%）</h2>
+            <div class="chart-container">
+                <canvas id="costChart"></canvas>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>成本項目</th>
+                        <th>VT</th>
+                        <th>VWRA</th>
+                        <th>說明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>管理費</td>
+                        <td>0.07%</td>
+                        <td>0.22%</td>
+                        <td>每年從淨值扣除</td>
+                    </tr>
+                    <tr>
+                        <td>稅務成本</td>
+                        <td class="negative">0.674%</td>
+                        <td>0.30%</td>
+                        <td>2% × 股息預扣稅率</td>
+                    </tr>
+                    <tr>
+                        <td>追蹤誤差</td>
+                        <td>0.02%</td>
+                        <td>0.05%</td>
+                        <td>實際表現vs指數</td>
+                    </tr>
+                    <tr style="background-color: #e8f5e8;">
+                        <td><strong>總年度持有成本</strong></td>
+                        <td><strong class="negative">0.764%</strong></td>
+                        <td><strong class="positive">0.570%</strong></td>
+                        <td><strong>VWRA低0.194%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 10年投資績效試算 -->
+        <div class="card">
+            <h2>📊 10年定期定額投資績效試算</h2>
+            <p><strong>投資條件：</strong>每月投入10,000元，投資期間10年，假設年化報酬率8%</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1,200,000</div>
+                    <div class="stat-label">總投入本金（元）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">120</div>
+                    <div class="stat-label">投資期間（月）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8%</div>
+                    <div class="stat-label">假設年化報酬率</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2%</div>
+                    <div class="stat-label">假設股息率</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+            <h3>最終投資績效比較</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>VT</th>
+                        <th>VWRA</th>
+                        <th>差異</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>總投入本金</td>
+                        <td>1,200,000元</td>
+                        <td>1,200,000元</td>
+                        <td>0元</td>
+                    </tr>
+                    <tr>
+                        <td>交易成本</td>
+                        <td>450元</td>
+                        <td>5,964元</td>
+                        <td class="negative">+5,514元</td>
+                    </tr>
+                    <tr>
+                        <td>稅務成本</td>
+                        <td class="negative">57,569元</td>
+                        <td>25,776元</td>
+                        <td class="positive">-31,793元</td>
+                    </tr>
+                    <tr>
+                        <td>累積稅後股息</td>
+                        <td>113,412元</td>
+                        <td class="positive">146,066元</td>
+                        <td class="positive">+32,654元</td>
+                    </tr>
+                    <tr style="background-color: #e8f5e8;">
+                        <td><strong>最終淨值</strong></td>
+                        <td><strong>1,760,175元</strong></td>
+                        <td><strong class="positive">1,778,423元</strong></td>
+                        <td><strong class="positive">+18,248元</strong></td>
+                    </tr>
+                    <tr>
+                        <td>總報酬率</td>
+                        <td>46.68%</td>
+                        <td class="positive">48.20%</td>
+                        <td class="positive">+1.52%</td>
+                    </tr>
+                    <tr>
+                        <td>年化報酬率</td>
+                        <td>3.91%</td>
+                        <td class="positive">4.01%</td>
+                        <td class="positive">+0.10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 不同股息率情境分析 -->
+        <div class="card">
+            <h2>🎯 不同股息率情境下的總持有成本</h2>
+            <div class="chart-container">
+                <canvas id="dividendScenarioChart"></canvas>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>投資情境（股息率）</th>
+                        <th>VT總成本</th>
+                        <th>VWRA總成本</th>
+                        <th>年度差異</th>
+                        <th>10年累積差異</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>低股息組合（1%）</td>
+                        <td>0.427%</td>
+                        <td>0.420%</td>
+                        <td>0.007%</td>
+                        <td>0.07%</td>
+                    </tr>
+                    <tr style="background-color: #fff3cd;">
+                        <td>標準組合（2%）</td>
+                        <td>0.764%</td>
+                        <td class="positive">0.570%</td>
+                        <td class="positive">0.194%</td>
+                        <td class="positive">1.94%</td>
+                    </tr>
+                    <tr>
+                        <td>高股息組合（3%）</td>
+                        <td>1.100%</td>
+                        <td class="positive">0.720%</td>
+                        <td class="positive">0.380%</td>
+                        <td class="positive">3.80%</td>
+                    </tr>
+                    <tr>
+                        <td>極高股息（4%）</td>
+                        <td>1.437%</td>
+                        <td class="positive">0.870%</td>
+                        <td class="positive">0.567%</td>
+                        <td class="positive">5.67%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 投資建議 -->
+        <div class="conclusion">
+            <h2>🎯 投資建議總結</h2>
+            <div class="performance-comparison">
+                <div class="performance-item winner">
+                    <h4>VWRA 主要優勢</h4>
+                    <ul style="list-style: none; text-align: left;">
+                        <li>✓ 稅務效率較高</li>
+                        <li>✓ 無遺產稅風險</li>
+                        <li>✓ 總持有成本較低</li>
+                        <li>✓ 長期績效較佳</li>
+                    </ul>
+                </div>
+                <div class="performance-item">
+                    <h4>VT 主要優勢</h4>
+                    <ul style="list-style: none; text-align: left;">
+                        <li>✓ 管理費較低</li>
+                        <li>✓ 交易成本較低</li>
+                        <li>✓ 流動性較好</li>
+                        <li>✓ 美國稅務簡單</li>
+                    </ul>
+                </div>
+                <div class="performance-item">
+                    <h4>推薦情境</h4>
+                    <ul style="list-style: none; text-align: left;">
+                        <li><strong>VWRA：</strong>台灣長期投資者</li>
+                        <li><strong>VWRA：</strong>資產 > 6萬美元</li>
+                        <li><strong>VWRA：</strong>高股息策略</li>
+                        <li><strong>VT：</strong>美國居民</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <h3>關鍵結論</h3>
+                <ul>
+                    <li>對台灣投資者而言，VWRA在稅務效率上具有顯著優勢</li>
+                    <li>10年定期定額投資，VWRA比VT多獲得約18,248元收益</li>
+                    <li>股息率越高，VWRA的稅務優勢越明顯</li>
+                    <li>VWRA可避免美國遺產稅風險，適合大額投資</li>
+                    <li>長期投資者建議選擇VWRA，短期交易者可考慮VT</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // 成本比較圖表
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'bar',
+            data: {
+                labels: ['管理費', '稅務成本', '追蹤誤差', '總成本'],
+                datasets: [{
+                    label: 'VT',
+                    data: [0.07, 0.674, 0.02, 0.764],
+                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    borderWidth: 2
+                }, {
+                    label: 'VWRA',
+                    data: [0.22, 0.30, 0.05, 0.570],
+                    backgroundColor: 'rgba(245, 87, 108, 0.8)',
+                    borderColor: 'rgba(245, 87, 108, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '年度持有成本比較 (%)',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 10年投資績效圖表
+        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(performanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['第1年', '第2年', '第3年', '第4年', '第5年', '第6年', '第7年', '第8年', '第9年', '第10年'],
+                datasets: [{
+                    label: 'VT 最終淨值',
+                    data: [125423, 260041, 404529, 559610, 726060, 904714, 1096465, 1302274, 1523172, 1760175],
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'VWRA 最終淨值',
+                    data: [125569, 260638, 405926, 562206, 730311, 911135, 1105639, 1314860, 1539910, 1778423],
+                    borderColor: 'rgba(245, 87, 108, 1)',
+                    backgroundColor: 'rgba(245, 87, 108, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '10年定期定額投資資產成長',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString() + '元';
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+
+        // 不同股息率情境圖表
+        const dividendCtx = document.getElementById('dividendScenarioChart').getContext('2d');
+        new Chart(dividendCtx, {
+            type: 'line',
+            data: {
+                labels: ['1%', '2%', '3%', '4%'],
+                datasets: [{
+                    label: 'VT 總成本',
+                    data: [0.427, 0.764, 1.100, 1.437],
+                    borderColor: 'rgba(102, 126, 234, 1)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    fill: false,
+                    tension: 0.4
+                }, {
+                    label: 'VWRA 總成本',
+                    data: [0.420, 0.570, 0.720, 0.870],
+                    borderColor: 'rgba(245, 87, 108, 1)',
+                    backgroundColor: 'rgba(245, 87, 108, 0.1)',
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '不同股息率下的總持有成本',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '股息率'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '總持有成本 (%)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 滾動到頂部功能
+        window.onscroll = function() {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollButton.style.display = "block";
+            } else {
+                scrollButton.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        // 添加平滑滾動效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
