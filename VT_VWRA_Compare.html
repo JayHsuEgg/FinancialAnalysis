@@ -336,6 +336,196 @@
             background: #2980b9;
             transform: translateY(-2px);
         }
+
+        /* 可折疊區域樣式 */
+        .collapsible-section {
+            margin: 20px 0;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-btn:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+        }
+
+        .collapsible-content {
+            display: none;
+            padding: 20px;
+            background: #fafbfc;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .collapsible-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 1000px;
+            }
+        }
+
+        /* 計算網格 */
+        .calculation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .calc-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .calc-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .calc-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* 計算步驟 */
+        .calculation-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            display: flex;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            min-width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h5 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .step-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .step-content li {
+            margin: 5px 0;
+            color: #34495e;
+        }
+
+        /* 公式樣式 */
+        .formula {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            color: #495057;
+        }
+
+        .formula-highlight {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #155724;
+            text-align: center;
+        }
+
+        .formula-section {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .formula-section h4 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+        }
+
+        /* 驗證樣式 */
+        .verification-steps {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .verification-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .verification-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .verification-item .formula {
+            margin: 5px 0 0 0;
+            background: #f1f8e9;
+            border-color: #c3e6cb;
+        }
     </style>
 </head>
 <body>
@@ -390,6 +580,89 @@
                         <h4>稅務節省</h4>
                         <div class="performance-value positive">18.67%</div>
                         <small>VWRA優勢</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 詳細稅務計算過程 -->
+            <div class="collapsible-section">
+                <button class="toggle-btn" onclick="toggleSection('tax-calculation')">
+                    📊 查看詳細稅務計算過程 <span id="tax-calculation-icon">▼</span>
+                </button>
+                <div id="tax-calculation" class="collapsible-content">
+                    <h3>地區配置假設（基於全球市值權重）</h3>
+                    <div class="calculation-grid">
+                        <div class="calc-item">
+                            <div class="calc-label">美國</div>
+                            <div class="calc-value">65%</div>
+                        </div>
+                        <div class="calc-item">
+                            <div class="calc-label">歐洲</div>
+                            <div class="calc-value">20%</div>
+                        </div>
+                        <div class="calc-item">
+                            <div class="calc-label">亞太及其他</div>
+                            <div class="calc-value">15%</div>
+                        </div>
+                    </div>
+
+                    <h4>VT 雙重課稅計算步驟</h4>
+                    <div class="calculation-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>第一層：ETF投資海外股票的預扣稅</h5>
+                                <ul>
+                                    <li>美國股票（65%）：0% × 65% = <strong>0%</strong></li>
+                                    <li>歐洲股票（20%）：15% × 20% = <strong>3%</strong></li>
+                                    <li>亞太股票（15%）：15% × 15% = <strong>2.25%</strong></li>
+                                </ul>
+                                <div class="formula">第一層加權平均稅率 = 0% + 3% + 2.25% = <strong>5.25%</strong></div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>第二層：台灣投資者被美國課稅</h5>
+                                <div class="formula">股息預扣稅 = <strong>30%</strong>（美台無協定）</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>總稅務負擔計算</h5>
+                                <ul>
+                                    <li>第一層後剩餘：100% - 5.25% = <strong>94.75%</strong></li>
+                                    <li>第二層後剩餘：94.75% × (100% - 30%) = <strong>66.33%</strong></li>
+                                </ul>
+                                <div class="formula-highlight">總有效稅率 = 100% - 66.33% = <strong>33.67%</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>VWRA 單層課稅計算步驟</h4>
+                    <div class="calculation-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>ETF收到各國股息時被課稅</h5>
+                                <div class="formula">平均稅率 = <strong>15%</strong>（愛爾蘭稅務協定優勢）</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>台灣投資者收到ETF配息</h5>
+                                <div class="formula">預扣稅率 = <strong>0%</strong>（愛爾蘭不徵稅）</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>總稅務負擔</h5>
+                                <div class="formula-highlight">總有效稅率 = <strong>15%</strong></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -488,6 +761,66 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- 詳細成本計算 -->
+            <div class="collapsible-section">
+                <button class="toggle-btn" onclick="toggleSection('cost-calculation')">
+                    💰 查看詳細成本計算過程 <span id="cost-calculation-icon">▼</span>
+                </button>
+                <div id="cost-calculation" class="collapsible-content">
+                    <h3>稅務成本計算詳解</h3>
+                    <div class="formula-section">
+                        <h4>VT 稅務成本計算</h4>
+                        <div class="formula">稅務成本 = 股息率 × 總有效稅率</div>
+                        <div class="formula">稅務成本 = 2% × 33.67% = <strong>0.674%</strong></div>
+                    </div>
+                    
+                    <div class="formula-section">
+                        <h4>VWRA 稅務成本計算</h4>
+                        <div class="formula">稅務成本 = 股息率 × 總有效稅率</div>
+                        <div class="formula">稅務成本 = 2% × 15% = <strong>0.30%</strong></div>
+                    </div>
+
+                    <h3>長期複利效應分析</h3>
+                    <p>看似微小的成本差異，在長期投資中會產生顯著的複利效應：</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>投資期間</th>
+                                <th>VT累積成本差異</th>
+                                <th>VWRA優勢</th>
+                                <th>對100萬投資的影響</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5年</td>
+                                <td>0.97%</td>
+                                <td>較低成本</td>
+                                <td>節省9,700元</td>
+                            </tr>
+                            <tr>
+                                <td>10年</td>
+                                <td>1.94%</td>
+                                <td>較低成本</td>
+                                <td>節省19,400元</td>
+                            </tr>
+                            <tr>
+                                <td>20年</td>
+                                <td>3.88%</td>
+                                <td>較低成本</td>
+                                <td>節省38,800元</td>
+                            </tr>
+                            <tr>
+                                <td>30年</td>
+                                <td>5.82%</td>
+                                <td>較低成本</td>
+                                <td>節省58,200元</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <!-- 10年投資績效試算 -->
@@ -511,6 +844,415 @@
                 <div class="stat-card">
                     <div class="stat-value">2%</div>
                     <div class="stat-label">假設股息率</div>
+                </div>
+            </div>
+
+            <!-- 詳細計算過程 -->
+            <div class="collapsible-section">
+                <button class="toggle-btn" onclick="toggleSection('calculation-process')">
+                    🧮 查看詳細計算過程與參數設定 <span id="calculation-process-icon">▼</span>
+                </button>
+                <div id="calculation-process" class="collapsible-content">
+                    <h3>基本假設與參數設定</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>參數項目</th>
+                                <th>數值</th>
+                                <th>說明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>投資方式</td>
+                                <td>定期定額</td>
+                                <td>每月固定投入</td>
+                            </tr>
+                            <tr>
+                                <td>每月投入金額</td>
+                                <td>10,000元</td>
+                                <td>新台幣</td>
+                            </tr>
+                            <tr>
+                                <td>總投入本金</td>
+                                <td>1,200,000元</td>
+                                <td>10,000元 × 120個月</td>
+                            </tr>
+                            <tr>
+                                <td>假設年化報酬率</td>
+                                <td>8%</td>
+                                <td>扣除成本前</td>
+                            </tr>
+                            <tr>
+                                <td>資本增值率</td>
+                                <td>6%</td>
+                                <td>年增長率</td>
+                            </tr>
+                            <tr>
+                                <td>股息率</td>
+                                <td>2%</td>
+                                <td>年配息率</td>
+                            </tr>
+                            <tr>
+                                <td>股息發放時點</td>
+                                <td>年底</td>
+                                <td>12月發放</td>
+                            </tr>
+                            <tr>
+                                <td>股息再投資</td>
+                                <td>是</td>
+                                <td>自動再投入</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>月報酬率計算</h3>
+                    <div class="formula-section">
+                        <h4>報酬率分解</h4>
+                        <div class="formula">年化總報酬率 = 資本增值率 + 股息收益率 = 6% + 2% = <strong>8%</strong></div>
+                        <div class="formula">月資本增值率 = (1 + 6%)^(1/12) - 1 = <strong>0.4868%</strong></div>
+                    </div>
+
+                    <h4>ETF淨報酬率計算</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ETF</th>
+                                <th>月資本增值率</th>
+                                <th>月管理費率</th>
+                                <th>淨月報酬率</th>
+                                <th>計算式</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>VT</strong></td>
+                                <td>0.4868%</td>
+                                <td>0.0058%</td>
+                                <td class="positive">0.4809%</td>
+                                <td>0.4868% - 0.07%/12</td>
+                            </tr>
+                            <tr>
+                                <td><strong>VWRA</strong></td>
+                                <td>0.4868%</td>
+                                <td>0.0183%</td>
+                                <td>0.4684%</td>
+                                <td>0.4868% - 0.22%/12</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 逐年詳細計算 -->
+            <div class="collapsible-section">
+                <button class="toggle-btn" onclick="toggleSection('yearly-details')">
+                    📈 查看逐年投資明細計算 <span id="yearly-details-icon">▼</span>
+                </button>
+                <div id="yearly-details" class="collapsible-content">
+                    <h3>VT 逐年投資明細表（已考慮購買手續費）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>年度</th>
+                                <th>累積投入</th>
+                                <th>年底資產價值</th>
+                                <th>稅前股息</th>
+                                <th>稅金(33.67%)</th>
+                                <th>稅後股息</th>
+                                <th>股息再投資後資產</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>第1年</td>
+                                <td>120,000元</td>
+                                <td>123,781元</td>
+                                <td>2,476元</td>
+                                <td>834元</td>
+                                <td>1,642元</td>
+                                <td>125,423元</td>
+                            </tr>
+                            <tr>
+                                <td>第2年</td>
+                                <td>240,000元</td>
+                                <td>256,637元</td>
+                                <td>5,133元</td>
+                                <td>1,728元</td>
+                                <td>3,405元</td>
+                                <td>260,041元</td>
+                            </tr>
+                            <tr>
+                                <td>第3年</td>
+                                <td>360,000元</td>
+                                <td>399,233元</td>
+                                <td>7,985元</td>
+                                <td>2,689元</td>
+                                <td>5,296元</td>
+                                <td>404,529元</td>
+                            </tr>
+                            <tr>
+                                <td>第4年</td>
+                                <td>480,000元</td>
+                                <td>552,283元</td>
+                                <td>11,046元</td>
+                                <td>3,719元</td>
+                                <td>7,327元</td>
+                                <td>559,610元</td>
+                            </tr>
+                            <tr>
+                                <td>第5年</td>
+                                <td>600,000元</td>
+                                <td>716,554元</td>
+                                <td>14,331元</td>
+                                <td>4,825元</td>
+                                <td>9,506元</td>
+                                <td>726,060元</td>
+                            </tr>
+                            <tr>
+                                <td>第6年</td>
+                                <td>720,000元</td>
+                                <td>892,869元</td>
+                                <td>17,857元</td>
+                                <td>6,013元</td>
+                                <td>11,845元</td>
+                                <td>904,714元</td>
+                            </tr>
+                            <tr>
+                                <td>第7年</td>
+                                <td>840,000元</td>
+                                <td>1,082,110元</td>
+                                <td>21,642元</td>
+                                <td>7,287元</td>
+                                <td>14,355元</td>
+                                <td>1,096,465元</td>
+                            </tr>
+                            <tr>
+                                <td>第8年</td>
+                                <td>960,000元</td>
+                                <td>1,285,224元</td>
+                                <td>25,704元</td>
+                                <td>8,655元</td>
+                                <td>17,050元</td>
+                                <td>1,302,274元</td>
+                            </tr>
+                            <tr>
+                                <td>第9年</td>
+                                <td>1,080,000元</td>
+                                <td>1,503,230元</td>
+                                <td>30,065元</td>
+                                <td>10,123元</td>
+                                <td>19,942元</td>
+                                <td>1,523,172元</td>
+                            </tr>
+                            <tr style="background-color: #e8f5e8;">
+                                <td><strong>第10年</strong></td>
+                                <td><strong>1,200,000元</strong></td>
+                                <td><strong>1,737,219元</strong></td>
+                                <td><strong>34,744元</strong></td>
+                                <td><strong>11,698元</strong></td>
+                                <td><strong>23,046元</strong></td>
+                                <td><strong>1,760,265元</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>VWRA 逐年投資明細表（已考慮購買手續費）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>年度</th>
+                                <th>累積投入</th>
+                                <th>年底資產價值</th>
+                                <th>稅前股息</th>
+                                <th>稅金(15%)</th>
+                                <th>稅後股息</th>
+                                <th>股息再投資後資產</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>第1年</td>
+                                <td>120,000元</td>
+                                <td>123,470元</td>
+                                <td>2,469元</td>
+                                <td>370元</td>
+                                <td>2,099元</td>
+                                <td>125,569元</td>
+                            </tr>
+                            <tr>
+                                <td>第2年</td>
+                                <td>240,000元</td>
+                                <td>256,281元</td>
+                                <td>5,126元</td>
+                                <td>769元</td>
+                                <td>4,357元</td>
+                                <td>260,638元</td>
+                            </tr>
+                            <tr>
+                                <td>第3年</td>
+                                <td>360,000元</td>
+                                <td>399,140元</td>
+                                <td>7,983元</td>
+                                <td>1,197元</td>
+                                <td>6,785元</td>
+                                <td>405,926元</td>
+                            </tr>
+                            <tr>
+                                <td>第4年</td>
+                                <td>480,000元</td>
+                                <td>552,809元</td>
+                                <td>11,056元</td>
+                                <td>1,658元</td>
+                                <td>9,398元</td>
+                                <td>562,206元</td>
+                            </tr>
+                            <tr>
+                                <td>第5年</td>
+                                <td>600,000元</td>
+                                <td>718,103元</td>
+                                <td>14,362元</td>
+                                <td>2,154元</td>
+                                <td>12,208元</td>
+                                <td>730,311元</td>
+                            </tr>
+                            <tr>
+                                <td>第6年</td>
+                                <td>720,000元</td>
+                                <td>895,904元</td>
+                                <td>17,918元</td>
+                                <td>2,688元</td>
+                                <td>15,230元</td>
+                                <td>911,135元</td>
+                            </tr>
+                            <tr>
+                                <td>第7年</td>
+                                <td>840,000元</td>
+                                <td>1,087,158元</td>
+                                <td>21,743元</td>
+                                <td>3,261元</td>
+                                <td>18,482元</td>
+                                <td>1,105,639元</td>
+                            </tr>
+                            <tr>
+                                <td>第8年</td>
+                                <td>960,000元</td>
+                                <td>1,292,881元</td>
+                                <td>25,858元</td>
+                                <td>3,879元</td>
+                                <td>21,979元</td>
+                                <td>1,314,860元</td>
+                            </tr>
+                            <tr>
+                                <td>第9年</td>
+                                <td>1,080,000元</td>
+                                <td>1,514,169元</td>
+                                <td>30,283元</td>
+                                <td>4,542元</td>
+                                <td>25,741元</td>
+                                <td>1,539,910元</td>
+                            </tr>
+                            <tr style="background-color: #e8f5e8;">
+                                <td><strong>第10年</strong></td>
+                                <td><strong>1,200,000元</strong></td>
+                                <td><strong>1,752,200元</strong></td>
+                                <td><strong>35,044元</strong></td>
+                                <td><strong>5,257元</strong></td>
+                                <td><strong>29,787元</strong></td>
+                                <td><strong>1,781,987元</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>成本明細計算</h3>
+                    <div class="comparison-grid">
+                        <div class="etf-card vt-card">
+                            <h4>VT 成本明細</h4>
+                            <div class="metric"><strong>買進手續費：</strong>3元 × 120次 = 360元</div>
+                            <div class="metric"><strong>賣出手續費：</strong>90元</div>
+                            <div class="metric"><strong>交易成本小計：</strong>450元</div>
+                            <div class="metric"><strong>累積稅金：</strong>57,569元</div>
+                            <div class="metric"><strong>最終淨值：</strong>1,760,175元</div>
+                        </div>
+                        <div class="etf-card vwra-card">
+                            <h4>VWRA 成本明細</h4>
+                            <div class="metric"><strong>買進手續費：</strong>10,000元×0.2%×120次 = 2,400元</div>
+                            <div class="metric"><strong>賣出手續費：</strong>1,781,987元×0.2% = 3,564元</div>
+                            <div class="metric"><strong>交易成本小計：</strong>5,964元</div>
+                            <div class="metric"><strong>累積稅金：</strong>25,776元</div>
+                            <div class="metric"><strong>最終淨值：</strong>1,778,423元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 計算驗證 -->
+            <div class="collapsible-section">
+                <button class="toggle-btn" onclick="toggleSection('calculation-verification')">
+                    ✅ 查看計算邏輯驗證 <span id="calculation-verification-icon">▼</span>
+                </button>
+                <div id="calculation-verification" class="collapsible-content">
+                    <h3>關鍵計算邏輯</h3>
+                    <div class="verification-steps">
+                        <div class="verification-item">
+                            <div class="verification-title">1. 累積投入計算</div>
+                            <div class="formula">累積投入 = 每月投入 × 投入月數（不扣除手續費）</div>
+                        </div>
+                        <div class="verification-item">
+                            <div class="verification-title">2. 年底資產計算</div>
+                            <div class="formula">年底資產 = 逐月(投入-手續費+增值)的累積結果</div>
+                        </div>
+                        <div class="verification-item">
+                            <div class="verification-title">3. 股息計算基礎</div>
+                            <div class="formula">股息計算基礎 = 年底資產價值（不是累積投入）</div>
+                        </div>
+                        <div class="verification-item">
+                            <div class="verification-title">4. 稅務處理</div>
+                            <div class="formula">稅後股息 = 稅前股息 × (1-稅率)</div>
+                        </div>
+                        <div class="verification-item">
+                            <div class="verification-title">5. 股息再投資</div>
+                            <div class="formula">稅後股息立即加入資產組合</div>
+                        </div>
+                    </div>
+
+                    <h3>計算步驟驗證表</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>驗證項目</th>
+                                <th>計算過程</th>
+                                <th>結果確認</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>第1年累積投入</td>
+                                <td>10,000元 × 12個月</td>
+                                <td class="positive">✅ 120,000元</td>
+                            </tr>
+                            <tr>
+                                <td>VT年底資產</td>
+                                <td>逐月投入+增值累積</td>
+                                <td class="positive">✅ 123,781元</td>
+                            </tr>
+                            <tr>
+                                <td>VT稅前股息</td>
+                                <td>123,781元 × 2%</td>
+                                <td class="positive">✅ 2,476元</td>
+                            </tr>
+                            <tr>
+                                <td>VT稅後股息</td>
+                                <td>2,476元 × (1-33.67%)</td>
+                                <td class="positive">✅ 1,642元</td>
+                            </tr>
+                            <tr>
+                                <td>股息再投資後</td>
+                                <td>123,781元 + 1,642元</td>
+                                <td class="positive">✅ 125,423元</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -837,6 +1579,20 @@
                 }
             }
         });
+
+        // 可折疊區域控制函數
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
 
         // 滾動到頂部功能
         window.onscroll = function() {
