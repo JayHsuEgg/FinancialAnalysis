@@ -4,173 +4,442 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>長期指數化投資研究專案</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --border-color: #30363d;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-            padding: 20px;
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
         }
-        .container {
-            max-width: 1200px;
+        
+        .hero {
+            background: linear-gradient(135deg, #1a1f35 0%, #0d1117 50%, #0f1419 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(88, 166, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(163, 113, 247, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 2em;
+        
+        .hero h1 {
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .subtitle {
-            color: #7f8c8d;
+        
+        .hero .subtitle {
+            font-size: 1.2em;
+            color: var(--text-secondary);
             margin-bottom: 30px;
-            font-size: 1.1em;
         }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .philosophy {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .philosophy h2 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: var(--accent-purple);
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .philosophy-item {
+            background: var(--bg-tertiary);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+        }
+        
+        .philosophy-item strong {
+            color: var(--accent-blue);
+        }
+        
         .section {
             margin-bottom: 40px;
         }
-        .section-title {
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-icon {
             font-size: 1.5em;
-            color: #34495e;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #3498db;
         }
-        ul {
-            list-style: none;
+        
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 600;
         }
-        li {
-            margin: 8px 0;
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
         }
-        a {
-            color: #3498db;
+        
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.2s ease;
             text-decoration: none;
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: all 0.3s;
+            color: inherit;
+            display: block;
         }
-        a:hover {
-            background-color: #ecf0f1;
-            color: #2980b9;
-            transform: translateX(5px);
+        
+        .card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         }
-        .file-number {
-            display: inline-block;
-            width: 30px;
-            color: #7f8c8d;
-            font-weight: bold;
+        
+        .card-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
-        .description {
-            color: #7f8c8d;
+        
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .card-desc {
             font-size: 0.9em;
-            margin-left: 30px;
+            color: var(--text-secondary);
+        }
+        
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75em;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        
+        .tag-core { background: rgba(63, 185, 80, 0.2); color: var(--accent-green); }
+        .tag-etf { background: rgba(88, 166, 255, 0.2); color: var(--accent-blue); }
+        .tag-strategy { background: rgba(163, 113, 247, 0.2); color: var(--accent-purple); }
+        .tag-asset { background: rgba(210, 153, 34, 0.2); color: var(--accent-orange); }
+        .tag-study { background: rgba(248, 81, 73, 0.2); color: var(--accent-red); }
+        
+        .featured-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #1c2333 100%);
+            border: 1px solid var(--accent-green);
+        }
+        
+        .featured-card .card-title {
+            font-size: 1.3em;
+            color: var(--accent-green);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .disclaimer {
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 40px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+        
+        .disclaimer strong {
+            color: var(--accent-red);
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2em; }
+            .hero-stats { gap: 20px; }
+            .stat-value { font-size: 1.5em; }
+            .card-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>長期指數化投資研究專案</h1>
-        <p class="subtitle">2025-2026 投資策略與分析文件</p>
-
-        <div class="section">
-            <h2 class="section-title">📋 核心計劃文件</h2>
-            <ul>
-                <li>
-                    <a href="0. 2026年長期指數化投資計畫.md">
-                        <span class="file-number">0.</span> 2026年長期指數化投資執行計劃
-                    </a>
-                </li>
-                <li>
-                    <a href="2025長期指數化投資研究專案目錄.md">
-                        <span class="file-number">📚</span> 2025長期指數化投資研究專案目錄
-                    </a>
-                </li>
-                <li>
-                    <a href="2025 教訓紀律.md">
-                        <span class="file-number">📖</span> 2025年執行檢討與教訓
-                    </a>
-                </li>
-            </ul>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>📈 長期指數化投資研究</h1>
+            <p class="subtitle">基於學術研究的被動投資策略分析與執行計畫</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">股票配置</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">1/3</div>
+                    <div class="stat-label">台股（0050）</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2/3</div>
+                    <div class="stat-label">國際（VWRA）</div>
+                </div>
+            </div>
         </div>
-
-        <div class="section">
-            <h2 class="section-title">📊 ETF 比較分析</h2>
-            <ul>
-                <li>
-                    <a href="1. 0050 ETF vs 元大台灣卓越50連結基金A類完整比較分析.md">
-                        <span class="file-number">1.</span> 0050 ETF vs 元大台灣卓越50連結基金A類完整比較分析
-                    </a>
-                </li>
-                <li>
-                    <a href="2. VT vs VWRA：台灣投資者完整比較分析.md">
-                        <span class="file-number">2.</span> VT vs VWRA：台灣投資者完整比較分析
-                    </a>
-                </li>
-                <li>
-                    <a href="4. 小型價值因子ETF完整比較：AVGS vs AVUV+AVDV.md">
-                        <span class="file-number">4.</span> 小型價值因子ETF完整比較：AVGS vs AVUV+AVDV
-                    </a>
-                </li>
-            </ul>
+    </header>
+    
+    <main class="container">
+        <section class="philosophy">
+            <h2>💡 核心投資理念</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <strong>挑戰傳統</strong><br>
+                    60/40 股債配置為次優策略
+                </div>
+                <div class="philosophy-item">
+                    <strong>學術支持</strong><br>
+                    100% 股票長期報酬最佳
+                </div>
+                <div class="philosophy-item">
+                    <strong>全球分散</strong><br>
+                    避免本國偏好，擁抱國際
+                </div>
+                <div class="philosophy-item">
+                    <strong>長期持有</strong><br>
+                    忽略短期波動，堅持紀律
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">核心計畫</h2>
+            </div>
+            <div class="card-grid">
+                <a href="0. 2026年長期指數化投資計畫.md" class="card featured-card">
+                    <div class="card-number">00</div>
+                    <div class="card-title">2026 年長期指數化投資執行計畫</div>
+                    <div class="card-desc">完整投資策略、資產配置、執行紀律與退休提領計畫</div>
+                    <span class="card-tag tag-core">核心文件</span>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">ETF 比較分析</h2>
+            </div>
+            <div class="card-grid">
+                <a href="1. 0050 ETF vs 元大台灣卓越50連結基金A類完整比較分析.md" class="card">
+                    <div class="card-number">01</div>
+                    <div class="card-title">0050 vs 元大台灣卓越50連結基金</div>
+                    <div class="card-desc">台股 ETF 與連結基金的費用、稅務、流動性完整比較</div>
+                    <span class="card-tag tag-etf">ETF 比較</span>
+                </a>
+                <a href="2. VT vs VWRA：台灣投資者完整比較分析.md" class="card">
+                    <div class="card-number">02</div>
+                    <div class="card-title">VT vs VWRA 完整比較</div>
+                    <div class="card-desc">全球股票 ETF：美國 vs 愛爾蘭註冊的稅務與遺產規劃</div>
+                    <span class="card-tag tag-etf">ETF 比較</span>
+                </a>
+                <a href="4. 小型價值因子ETF完整比較：AVGS vs AVUV+AVDV.md" class="card">
+                    <div class="card-number">04</div>
+                    <div class="card-title">小型價值因子 ETF 比較</div>
+                    <div class="card-desc">AVGS vs AVUV+AVDV：因子投資策略選擇</div>
+                    <span class="card-tag tag-etf">ETF 比較</span>
+                </a>
+                <a href="7. 短期美債ETF SGOV vs IB01 完整分析.md" class="card">
+                    <div class="card-number">07</div>
+                    <div class="card-title">短期美債 ETF 完整分析</div>
+                    <div class="card-desc">SGOV vs IB01 vs BOXX：預扣稅、遺產稅與策略選擇</div>
+                    <span class="card-tag tag-etf">ETF 比較</span>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">🌍</span>
+                <h2 class="section-title">投資策略研究</h2>
+            </div>
+            <div class="card-grid">
+                <a href="3. VT全球分散投資 vs 地區產業集中投資學術分析報告.md" class="card">
+                    <div class="card-number">03</div>
+                    <div class="card-title">全球分散 vs 集中投資</div>
+                    <div class="card-desc">市值加權的優缺點與學術研究支持的分散投資策略</div>
+                    <span class="card-tag tag-strategy">策略分析</span>
+                </a>
+                <a href="8. 三牛一熊投資策略完整解析.md" class="card">
+                    <div class="card-number">08</div>
+                    <div class="card-title">三牛一熊策略解析</div>
+                    <div class="card-desc">市場循環、投資時機與長期配置策略</div>
+                    <span class="card-tag tag-strategy">策略分析</span>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">💰</span>
+                <h2 class="section-title">資產類別分析</h2>
+            </div>
+            <div class="card-grid">
+                <a href="5. 全球債券ETF完整比較分析.md" class="card">
+                    <div class="card-number">05</div>
+                    <div class="card-title">全球債券 ETF 比較</div>
+                    <div class="card-desc">債券配置選擇與利率風險分析</div>
+                    <span class="card-tag tag-asset">資產分析</span>
+                </a>
+                <a href="6. 比特幣ETF投資指南.md" class="card">
+                    <div class="card-number">06</div>
+                    <div class="card-title">比特幣 ETF 投資指南</div>
+                    <div class="card-desc">加密貨幣 ETF 比較與配置建議</div>
+                    <span class="card-tag tag-asset">資產分析</span>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📚</span>
+                <h2 class="section-title">學術研究與學習</h2>
+            </div>
+            <div class="card-grid">
+                <a href="9. 沉沒成本效應案例學習.md" class="card">
+                    <div class="card-number">09</div>
+                    <div class="card-title">沉沒成本效應案例</div>
+                    <div class="card-desc">投資心理學與行為偏誤案例學習</div>
+                    <span class="card-tag tag-study">投資心理</span>
+                </a>
+                <a href="10. 論文筆記：Beyond the Status Quo.md" class="card">
+                    <div class="card-number">10</div>
+                    <div class="card-title">論文筆記：Beyond the Status Quo</div>
+                    <div class="card-desc">核心學術論文精華摘要：挑戰傳統生命週期投資建議</div>
+                    <span class="card-tag tag-study">學術研究</span>
+                </a>
+            </div>
+        </section>
+        
+        <div class="disclaimer">
+            <strong>⚠️ 免責聲明</strong><br>
+            本專案僅供學術研究與個人學習參考，不構成任何投資建議。投資有風險，請自行評估並承擔。數據可能有誤差，請以官方來源為準。過去績效不代表未來表現。
         </div>
-
-        <div class="section">
-            <h2 class="section-title">🌍 投資策略分析</h2>
-            <ul>
-                <li>
-                    <a href="3. VT全球分散投資 vs 地區產業集中投資學術分析報告.md">
-                        <span class="file-number">3.</span> VT全球分散投資 vs 地區產業集中投資學術分析報告
-                    </a>
-                </li>
-                <li>
-                    <a href="8. 三牛一熊投資策略完整解析.md">
-                        <span class="file-number">8.</span> 三牛一熊投資策略完整解析
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">💰 資產類別分析</h2>
-            <ul>
-                <li>
-                    <a href="5. 全球債券ETF完整比較分析.md">
-                        <span class="file-number">5.</span> 全球債券ETF完整比較分析
-                    </a>
-                </li>
-                <li>
-                    <a href="6. 比特幣ETF投資指南.md">
-                        <span class="file-number">6.</span> 比特幣ETF投資指南
-                    </a>
-                </li>
-                <li>
-                    <a href="7. 短期美債ETF SGOV vs IB01 完整分析.md">
-                        <span class="file-number">7.</span> 短期美債ETF SGOV vs IB01 完整分析
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 class="section-title">📚 學習案例</h2>
-            <ul>
-                <li>
-                    <a href="9. 沉沒成本效應案例學習.md">
-                        <span class="file-number">9.</span> 沉沒成本效應案例學習
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </main>
+    
+    <footer class="footer">
+        <p>
+            基於 <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4590406" target="_blank">Beyond the Status Quo</a> 學術研究
+            <br>
+            <a href="https://github.com/" target="_blank">GitHub</a> · 
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+            <br><br>
+            最後更新：2026 年 1 月
+        </p>
+    </footer>
 </body>
 </html>
