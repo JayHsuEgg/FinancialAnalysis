@@ -267,6 +267,109 @@
             .stat-value { font-size: 1.5em; }
             .card-grid { grid-template-columns: 1fr; }
         }
+
+        /* Markdown viewer modal */
+        .md-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 4, 9, 0.8);
+            z-index: 1000;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .md-overlay.open { display: block; }
+        .md-modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 32px 48px;
+            position: relative;
+        }
+        .md-toolbar {
+            position: sticky;
+            top: -8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-secondary);
+            padding: 12px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .md-toolbar .md-title {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .md-actions { display: flex; gap: 8px; flex-shrink: 0; }
+        .md-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font: inherit;
+            font-size: 0.85em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .md-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .md-body { color: var(--text-primary); }
+        .md-body h1, .md-body h2, .md-body h3, .md-body h4 {
+            margin: 1.2em 0 0.5em;
+            line-height: 1.3;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+        .md-body h1 { color: var(--accent-blue); }
+        .md-body h4 { border-bottom: none; }
+        .md-body p, .md-body li { margin: 0.5em 0; }
+        .md-body ul, .md-body ol { padding-left: 1.5em; }
+        .md-body a { color: var(--accent-blue); }
+        .md-body code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88em;
+        }
+        .md-body pre {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 16px;
+            overflow-x: auto;
+        }
+        .md-body pre code { background: none; padding: 0; }
+        .md-body blockquote {
+            border-left: 3px solid var(--accent-orange);
+            padding: 4px 16px;
+            margin: 1em 0;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 0 6px 6px 0;
+        }
+        .md-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+            display: block;
+            overflow-x: auto;
+        }
+        .md-body th, .md-body td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .md-body th { background: var(--bg-tertiary); }
+        .md-body tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+        .md-loading { color: var(--text-secondary); padding: 40px 0; text-align: center; }
     </style>
 </head>
 <body>
@@ -320,10 +423,16 @@
                 <h2 class="section-title">核心計畫</h2>
             </div>
             <div class="card-grid">
-                <a href="0. 2026年長期指數化投資計畫.md" class="card featured-card">
+                <a href="0. 投資心法總綱.md" class="card featured-card">
                     <div class="card-number">00</div>
-                    <div class="card-title">2026 年長期指數化投資執行計畫</div>
-                    <div class="card-desc">完整投資策略、資產配置、執行紀律與退休提領計畫</div>
+                    <div class="card-title">投資心法總綱</div>
+                    <div class="card-desc">原則總綱:三件地基 + 五條心法 + 配置表(直覺速查,最先讀這份)</div>
+                    <span class="card-tag tag-core">核心文件</span>
+                </a>
+                <a href="1. 2026投資執行紀錄.md" class="card featured-card">
+                    <div class="card-number">01</div>
+                    <div class="card-title">2026 投資執行紀錄</div>
+                    <div class="card-desc">個人實際配置、觀點演進、父母退休組合、遺產稅規劃</div>
                     <span class="card-tag tag-core">核心文件</span>
                 </a>
             </div>
@@ -335,16 +444,16 @@
                 <h2 class="section-title">ETF 比較分析</h2>
             </div>
             <div class="card-grid">
-                <a href="1. 0050 ETF vs 元大台灣卓越50連結基金A類完整比較分析.md" class="card">
-                    <div class="card-number">01</div>
+                <a href="2. 0050 ETF vs 元大台灣卓越50連結基金A類完整比較分析.md" class="card">
+                    <div class="card-number">02</div>
                     <div class="card-title">0050 vs 元大台灣卓越50連結基金</div>
                     <div class="card-desc">台股 ETF 與連結基金的費用、稅務、流動性完整比較</div>
                     <span class="card-tag tag-etf">ETF 比較</span>
                 </a>
-                <a href="2. VT vs VWRA：台灣投資者完整比較分析.md" class="card">
-                    <div class="card-number">02</div>
-                    <div class="card-title">VT vs VWRA 完整比較</div>
-                    <div class="card-desc">全球股票 ETF：美國 vs 愛爾蘭註冊的稅務與遺產規劃</div>
+                <a href="3. VT vs IMID vs VWRA vs ACWD 完整比較.md" class="card">
+                    <div class="card-number">03</div>
+                    <div class="card-title">VT vs IMID vs VWRA vs ACWD 完整比較</div>
+                    <div class="card-desc">全球股票 ETF 四方比較：美國 vs 愛爾蘭三檔，附換股案例</div>
                     <span class="card-tag tag-etf">ETF 比較</span>
                 </a>
                 <a href="4. 小型價值因子ETF完整比較：AVGS vs AVUV+AVDV.md" class="card">
@@ -353,57 +462,42 @@
                     <div class="card-desc">AVGS vs AVUV+AVDV：因子投資策略選擇</div>
                     <span class="card-tag tag-etf">ETF 比較</span>
                 </a>
-                <a href="7. 短期美債ETF SGOV vs IB01 完整分析.md" class="card">
-                    <div class="card-number">07</div>
+                <a href="5. 短期美債ETF SGOV vs IB01 完整分析.md" class="card">
+                    <div class="card-number">05</div>
                     <div class="card-title">短期美債 ETF 完整分析</div>
                     <div class="card-desc">SGOV vs IB01 vs BOXX：預扣稅、遺產稅與策略選擇</div>
                     <span class="card-tag tag-etf">ETF 比較</span>
                 </a>
+                <a href="6. 比特幣ETF投資指南.md" class="card">
+                    <div class="card-number">06</div>
+                    <div class="card-title">比特幣 ETF 投資指南</div>
+                    <div class="card-desc">加密貨幣 ETF 比較與配置建議</div>
+                    <span class="card-tag tag-etf">ETF 比較</span>
+                </a>
             </div>
         </section>
-        
+
         <section class="section">
             <div class="section-header">
                 <span class="section-icon">🌍</span>
                 <h2 class="section-title">投資策略研究</h2>
             </div>
             <div class="card-grid">
-                <a href="3. VT全球分散投資 vs 地區產業集中投資學術分析報告.md" class="card">
-                    <div class="card-number">03</div>
+                <a href="7. VT全球分散投資 vs 地區產業集中投資學術分析報告.md" class="card">
+                    <div class="card-number">07</div>
                     <div class="card-title">全球分散 vs 集中投資</div>
                     <div class="card-desc">市值加權的優缺點與學術研究支持的分散投資策略</div>
                     <span class="card-tag tag-strategy">策略分析</span>
                 </a>
-                <a href="8. 三牛一熊投資策略完整解析.md" class="card">
+                <a href="8. 槓桿DCA實證.md" class="card">
                     <div class="card-number">08</div>
-                    <div class="card-title">三牛一熊策略解析</div>
-                    <div class="card-desc">市場循環、投資時機與長期配置策略</div>
+                    <div class="card-title">槓桿 DCA 實證</div>
+                    <div class="card-desc">大跌後 DCA 槓桿 ETF:多市場回測 + 現金硬上限保命線</div>
                     <span class="card-tag tag-strategy">策略分析</span>
                 </a>
             </div>
         </section>
-        
-        <section class="section">
-            <div class="section-header">
-                <span class="section-icon">💰</span>
-                <h2 class="section-title">資產類別分析</h2>
-            </div>
-            <div class="card-grid">
-                <a href="5. 全球債券ETF完整比較分析.md" class="card">
-                    <div class="card-number">05</div>
-                    <div class="card-title">全球債券 ETF 比較</div>
-                    <div class="card-desc">債券配置選擇與利率風險分析</div>
-                    <span class="card-tag tag-asset">資產分析</span>
-                </a>
-                <a href="6. 比特幣ETF投資指南.md" class="card">
-                    <div class="card-number">06</div>
-                    <div class="card-title">比特幣 ETF 投資指南</div>
-                    <div class="card-desc">加密貨幣 ETF 比較與配置建議</div>
-                    <span class="card-tag tag-asset">資產分析</span>
-                </a>
-            </div>
-        </section>
-        
+
         <section class="section">
             <div class="section-header">
                 <span class="section-icon">📚</span>
@@ -438,8 +532,77 @@
             <a href="https://github.com/" target="_blank">GitHub</a> · 
             <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
             <br><br>
-            最後更新：2026 年 1 月
+            最後更新：2026 年 7 月
         </p>
     </footer>
+
+    <div class="md-overlay" id="mdOverlay">
+        <div class="md-modal">
+            <div class="md-toolbar">
+                <span class="md-title" id="mdTitle"></span>
+                <div class="md-actions">
+                    <a class="md-btn" id="mdRaw" href="#" target="_blank" rel="noopener">原始檔</a>
+                    <button class="md-btn" id="mdClose">✕ 關閉</button>
+                </div>
+            </div>
+            <div class="md-body" id="mdBody"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        (function () {
+            var overlay = document.getElementById('mdOverlay');
+            var body = document.getElementById('mdBody');
+            var title = document.getElementById('mdTitle');
+            var rawLink = document.getElementById('mdRaw');
+
+            function close() {
+                overlay.classList.remove('open');
+                body.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+
+            function open(href, label) {
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                title.textContent = label || href;
+                rawLink.href = href;
+                body.innerHTML = '<div class="md-loading">載入中…</div>';
+                overlay.querySelector('.md-modal').scrollTop = 0;
+                fetch(href)
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.text();
+                    })
+                    .then(function (text) {
+                        body.innerHTML = marked.parse(text);
+                    })
+                    .catch(function (e) {
+                        body.innerHTML = '<div class="md-loading">無法載入此檔案（' + e.message +
+                            '）。<br>可點右上「原始檔」直接開啟。</div>';
+                    });
+            }
+
+            // Intercept clicks on cards that link to .md files
+            document.querySelectorAll('a.card').forEach(function (card) {
+                var href = card.getAttribute('href') || '';
+                if (!/\.md$/i.test(href)) return;
+                card.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var label = (card.querySelector('.card-title') || {}).textContent || href;
+                    open(href, label);
+                });
+            });
+
+            document.getElementById('mdClose').addEventListener('click', close);
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) close();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -24,3 +24,6 @@ desktop.ini
 # Personal/sensitive files (if any)
 *.private.md
 
+# Local dev tooling (Claude Code preview config, local permissions)
+.claude/
+
