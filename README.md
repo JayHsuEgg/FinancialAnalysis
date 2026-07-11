@@ -4,6 +4,13 @@
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
+## 線上閱讀
+
+> 本 README 為**專案概論**（適合 GitHub 瀏覽與 Fork）。
+> 完整文件導覽與站內閱讀請至 GitHub Pages；各篇 `.md` 含詳細分析與論證。
+
+**首頁**：[jayhsuegg.github.io/FinancialAnalysis](https://jayhsuegg.github.io/FinancialAnalysis/)
+
 ## 🎯 專案目標
 
 本專案收錄 2025-2026 年長期指數化投資策略研究，核心理念基於學術論文 *"Beyond the Status Quo: A Critical Assessment of Lifecycle Investment Advice"* (Anarkulova, Cederburg, O'Doherty；本專案以 **2024/11/18 修訂版**全文核校，SSRN 4590406)，挑戰傳統生命週期投資建議。
@@ -44,45 +51,29 @@
 ### 核心計畫
 | 編號 | 文件 | 說明 |
 |-----|------|------|
-| 0 | [投資心法總綱](0.%20投資心法總綱.md) | 原則總綱:三地基 + 五心法 + 配置(直覺速查) |
-| 1 | [2026投資執行紀錄](1.%202026投資執行紀錄.md) | 個人配置、觀點演進、父母組合、遺產稅 |
+| 0 | [投資心法總綱](0.%20投資心法總綱.md) | 原則總綱，最先讀 |
+| 1 | [2026投資執行紀錄](1.%202026投資執行紀錄.md) | 個人配置與遺產稅 |
 
 ### ETF 比較分析
 | 編號 | 文件 | 說明 |
 |-----|------|------|
-| 2 | [0050 vs 元大台灣卓越50連結基金](2.%200050%20ETF%20vs%20元大台灣卓越50連結基金A類完整比較分析.md) | 台股 ETF 與連結基金比較 |
-| 3 | [VT vs IMID vs VWRA vs ACWD 完整比較](3.%20VT%20vs%20IMID%20vs%20VWRA%20vs%20ACWD%20完整比較.md) | 全球股票 ETF 四方比較：美國 vs 愛爾蘭三檔，附換股案例 |
-| 4 | [小型價值因子 ETF 比較](4.%20小型價值因子ETF完整比較：AVGS%20vs%20AVUV+AVDV.md) | AVGS vs AVUV+AVDV |
-| 5 | [短期美債 ETF 完整分析](5.%20短期美債ETF%20SGOV%20vs%20IB01%20完整分析.md) | SGOV vs IB01 vs BOXX：預扣稅、遺產稅、抗風險、報酬 |
-| 6 | [比特幣 ETF 投資指南](6.%20比特幣ETF投資指南.md) | 加密貨幣 ETF 分析 |
+| 2 | [0050 vs 元大台灣卓越50連結基金](2.%200050%20ETF%20vs%20元大台灣卓越50連結基金A類完整比較分析.md) | 費用、稅務、流動性 |
+| 3 | [VT vs IMID vs VWRA vs ACWD 完整比較](3.%20VT%20vs%20IMID%20vs%20VWRA%20vs%20ACWD%20完整比較.md) | 四方比較，附換股 |
+| 4 | [小型價值因子 ETF 比較](4.%20小型價值因子ETF完整比較：AVGS%20vs%20AVUV+AVDV.md) | 因子投資策略 |
+| 5 | [短期美債 ETF 完整分析](5.%20短期美債ETF%20SGOV%20vs%20IB01%20完整分析.md) | 預扣稅、遺產稅 |
+| 6 | [比特幣 ETF 投資指南](6.%20比特幣ETF投資指南.md) | 加密貨幣 ETF |
 
 ### 投資策略研究
 | 編號 | 文件 | 說明 |
 |-----|------|------|
-| 7 | [全球分散 vs 集中投資](7.%20VT全球分散投資%20vs%20地區產業集中投資學術分析報告.md) | 學術研究支持的分散投資 |
-| 8 | [槓桿DCA實證](8.%20槓桿DCA實證.md) | 大跌後 DCA 槓桿 ETF:多市場回測 + 現金硬上限 |
+| 7 | [全球分散 vs 集中投資](7.%20VT全球分散投資%20vs%20地區產業集中投資學術分析報告.md) | 學術分散投資 |
+| 8 | [槓桿DCA實證](8.%20槓桿DCA實證.md) | 回測 + 現金上限 |
 
 ### 學術研究與學習
 | 編號 | 文件 | 說明 |
 |-----|------|------|
-| 9 | [沉沒成本效應案例](9.%20沉沒成本效應案例學習.md) | 投資心理學案例 |
-| 10 | [論文筆記：Beyond the Status Quo](10.%20論文筆記：Beyond%20the%20Status%20Quo.md) | 核心論文精華摘要 |
-
-## 💡 投資理念
-
-```
-📌 100% 股票配置（無固定收益）
-📌 1/3 台股（0050）+ 2/3 國際（VWRA）
-📌 短債作為抄底彈藥庫，非長期配置
-📌 定期定額 + 逢低加碼
-📌 長期持有，忽略短期波動
-```
-
-## 🔗 GitHub Pages
-
-本專案可透過 GitHub Pages 瀏覽：
-- **首頁**：[index.html](https://[username].github.io/FinancialAnalysis/)
-- **啟用方式**：Settings → Pages → Deploy from branch → main → / (root)
+| 9 | [沉沒成本效應案例](9.%20沉沒成本效應案例學習.md) | 投資心理學 |
+| 10 | [論文筆記：Beyond the Status Quo](10.%20論文筆記：Beyond%20the%20Status%20Quo.md) | 論文精華摘要 |
 
 ## ⚠️ 免責聲明
 
@@ -109,4 +100,3 @@
 ---
 
 *最後更新：2026年7月*
-
