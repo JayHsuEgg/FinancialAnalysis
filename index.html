@@ -61,7 +61,7 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -90,7 +90,7 @@
 
         .hero-dual {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 20px;
             text-align: left;
         }
@@ -356,9 +356,12 @@
             color: var(--accent-red);
         }
         
+        @media (max-width: 960px) {
+            .hero-dual { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 600px) {
             .hero h1 { font-size: 2em; }
-            .hero-dual { grid-template-columns: 1fr; }
             .hero-val { font-size: 1.15em; }
             .hero-stats { gap: 20px; }
             .stat-value { font-size: 1.5em; }
@@ -510,7 +513,7 @@
                     </div>
                 </div>
                 <div class="hero-panel hero-panel-retire">
-                    <div class="hero-panel-title">退休人士的比例建議</div>
+                    <div class="hero-panel-title">父母退休組合</div>
                     <div class="hero-row">
                         <span class="hero-val">50%</span>
                         <span class="hero-desc">VWRA</span>
@@ -521,20 +524,20 @@
                     </div>
                     <div class="hero-row">
                         <span class="hero-val">5%</span>
-                        <span class="hero-desc">Bitcoin ETF</span>
+                        <span class="hero-desc">IBIT</span>
                     </div>
                     <div class="hero-row">
                         <span class="hero-val">20%</span>
                         <span class="hero-desc">短債彈藥庫（SGOV）</span>
                     </div>
                     <div class="hero-row hero-row-detail">
-                        <span class="hero-desc">另計安全金[台幣定存]：2 年生活費（或更久）<br>SGOV 20% : 替代「沒有月退」的缺口</span>
+                        <span class="hero-desc">另計安全金（台幣定存）：2 年生活費<br>SGOV 20% 替代「沒有月退」的缺口</span>
                     </div>
                 </div>
             </div>
             <p class="hero-note">
-                地基來自論文；個人偏離為主動判斷，詳見
-                <a href="1. 2026投資執行紀錄.md">2026 投資執行紀錄</a>
+                三種配置：論文地基、個人執行、父母退休（前提不同，詳見
+                <a href="1. 2026投資執行紀錄.md">2026 投資執行紀錄</a>）
             </p>
         </div>
     </header>
