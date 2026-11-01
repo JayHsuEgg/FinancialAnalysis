@@ -71,7 +71,8 @@ Check the **whole outgoing range**, not just the last commit:
    owner before pushing (fixing it means rewriting those unpushed commits).
 
 Report the result to the owner (clean, or each finding with file:line). Push only after a
-clean result **and** an explicit go-ahead.
+clean result **and** an explicit go-ahead. The owner saying "push" is that go-ahead: run the
+check, and if it is clean, push without asking a second time.
 
 ### Mechanical safety net: `.githooks/pre-push`
 
