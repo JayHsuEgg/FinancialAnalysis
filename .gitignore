@@ -1,0 +1,31 @@
+.cursorrules
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# Personal/sensitive files (if any)
+*.private.md
+# Personal keyword list for the pre-push privacy check — the keywords themselves are private
+.privacy-denylist.local
+
+# Local dev tooling (Claude Code preview config, local permissions)
+.claude/
+

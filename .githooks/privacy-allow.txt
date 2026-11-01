@@ -1,0 +1,6 @@
+# Public, non-personal matches the privacy check may ignore — one regex per line (full match).
+# Only add things that are already public and not about the repo owner.
+# Authors' published contact emails inside paper/Beyond the Status Quo (SSRN 4590406):
+aizhan\.anarkulova@emory\.edu
+cederburg@arizona\.edu
+odohertym@missouri\.edu
