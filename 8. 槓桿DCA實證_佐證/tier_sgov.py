@@ -16,6 +16,13 @@ Backtest of the leverage rule as actually written in files 0 and 1 (errata B2):
     <= cap x cumulative contributions. Whatever the cap blocks stays where it was
     (SGOV stays in SGOV; new money goes to the prototype).
   * Nothing is ever sold: no swap, no selling prototype for leverage.
+  * Annual rebalance (--rebalance annual, the default since 2026-11-01): on the first
+    trading day of each year, SGOV is brought back to sgov_share of (prototype + SGOV).
+    The leveraged sleeve is excluded and never sold. The rebalance runs only while all
+    three tiers are armed (none used since the last all-time high) and the new-money
+    switch is off; after a tier has been used, SGOV is refilled by new money only, so
+    no prototype is sold near a low to rebuild the dry powder.
+    The baselines rebalance to the same weights every year.
   * Control D sends the same SGOV batches into the 1x prototype instead, to separate
     "spending idle cash in a crash" from "using 2x leverage for it" (B minus D).
 
@@ -41,6 +48,8 @@ p.add_argument("--leg-csv", help="use a REAL leveraged ETF's daily prices (csv i
 p.add_argument("--leg-under", help="model the leveraged leg as 2x of ANOTHER index (csv in this folder, e.g. spy.csv) "
                                    "with --exp/--calib; triggers and prototype stay on --market")
 p.add_argument("--market", choices=["all", "vt", "spy", "n225", "spx"], default="all")
+p.add_argument("--rebalance", choices=["annual", "none"], default="annual",
+               help="annual: yearly SGOV rebalance as described above; none: the pre-2026-11-01 runs")
 args = p.parse_args()
 
 IRX = None
@@ -95,6 +104,11 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True, sgov_share=No
     else:
         buyset = set(idx)
     s_share = args.sgov_share if sgov_share is None else sgov_share
+    rebal_days = set()
+    if args.rebalance == "annual":
+        years = pd.Series(idx, index=idx).groupby(idx.year).first()
+        rebal_days = set(years.iloc[1:])      # first trading day of every year after the start
+    n_rebal = 0
     proto = lev = sgov = 0.0                  # market values
     b_proto = b_sgov = 0.0                    # baseline market values
     inv = lev_cash = 0.0
@@ -116,6 +130,14 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True, sgov_share=No
             state = "LEVERAGED"
         elif state == "LEVERAGED" and row["u"] >= 0.80 * peak:
             state = "NORMAL"
+        if dt in rebal_days and s_share > 0:
+            # baseline: plain yearly rebalance to the target split
+            b_tot = b_proto + b_sgov
+            b_sgov, b_proto = b_tot * s_share, b_tot * (1 - s_share)
+            # strategy: only when every tier is armed and the new-money switch is off
+            if not fired and state == "NORMAL":
+                target = (proto + sgov) * s_share
+                proto -= target - sgov; sgov = target; n_rebal += 1
         if dt in buyset:
             inv += 1.0; flow_dates.append(dt); flows.append(-1.0)
             s_part = s_share; e_part = 1.0 - s_part
@@ -145,7 +167,7 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True, sgov_share=No
     flow_dates.append(idx[-1]); flows.append(strat)
     return dict(strat_x=strat / inv, base_x=base / inv, edge=(strat / base - 1) * 100,
                 cash_pct=lev_cash / inv * 100, end_pct=lev / strat * 100,
-                max_pct=max_lev_share * 100, fires=n_fire,
+                max_pct=max_lev_share * 100, fires=n_fire, rebal=n_rebal,
                 irr=irr(flow_dates, flows) * 100, mdd=twr_mdd * 100)
 
 MARKETS = [
@@ -168,7 +190,7 @@ elif args.leg_under:
     leg_txt = f"2x model of {args.leg_under} exp={args.exp:.2%} calib={args.calib:.2%}"
 else:
     leg_txt = f"2x model exp={args.exp:.2%} calib={args.calib:.2%}"
-L = [f"TIERED SGOV BACKTEST  {leg_txt} sgov_share={args.sgov_share:.0%} cash cap={args.cap:.0%}",
+L = [f"TIERED SGOV BACKTEST  {leg_txt} sgov_share={args.sgov_share:.0%} cash cap={args.cap:.0%} rebalance={args.rebalance}",
      "edge = strategy vs baseline with the same SGOV share and no leverage",
      "cash% = cumulative cash into leverage / contributions; end% / max% = leverage market-value share at end / at worst\n"]
 for mname, path, freq, fr, _ in MARKETS:

@@ -41,24 +41,24 @@ z
    </g>
    <g id="patch_3">
     <path d="M 49.46 86.530909 
-L 166.79397 86.530909 
-L 166.79397 67.876364 
+L 167.455006 86.530909 
+L 167.455006 67.876364 
 L 49.46 67.876364 
 z
 " clip-path="url(#p77cb49479a)" style="fill: #b5b3ab; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 49.46 117.621818 
-L 172.869515 117.621818 
-L 172.869515 98.967273 
+L 170.509893 117.621818 
+L 170.509893 98.967273 
 L 49.46 98.967273 
 z
 " clip-path="url(#p77cb49479a)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 49.46 148.712727 
-L 184.261163 148.712727 
-L 184.261163 130.058182 
+L 184.256884 148.712727 
+L 184.256884 130.058182 
 L 49.46 130.058182 
 z
 " clip-path="url(#p77cb49479a)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
@@ -623,7 +623,7 @@ L 49.46 62.28
    </g>
    <g id="text_5">
     <!-- 3.09 -->
-    <g style="fill: #0b0b0b" transform="translate(168.827379 79.821332) scale(0.095 -0.095)">
+    <g style="fill: #0b0b0b" transform="translate(169.488415 79.821332) scale(0.095 -0.095)">
      <defs>
       <path id="NotoSansTC-Thin-33" d="M 1619 -83 
 Q 1261 -83 998 13 
@@ -752,8 +752,50 @@ z
     </g>
    </g>
    <g id="text_6">
-    <!-- 3.25 -->
-    <g style="fill: #0b0b0b" transform="translate(174.902924 110.912241) scale(0.095 -0.095)">
+    <!-- 3.17 -->
+    <g style="fill: #0b0b0b" transform="translate(172.543302 110.912241) scale(0.095 -0.095)">
+     <defs>
+      <path id="NotoSansTC-Thin-31" d="M 608 0 
+L 608 211 
+L 1677 211 
+L 1677 4211 
+L 864 4211 
+L 864 4378 
+Q 1133 4422 1344 4492 
+Q 1555 4563 1702 4646 
+L 1901 4646 
+L 1901 211 
+L 2899 211 
+L 2899 0 
+L 608 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="NotoSansTC-Thin-37" d="M 1344 0 
+Q 1376 717 1462 1318 
+Q 1549 1920 1712 2445 
+Q 1875 2970 2124 3459 
+Q 2374 3949 2726 4435 
+L 307 4435 
+L 307 4646 
+L 3034 4646 
+L 3034 4512 
+Q 2624 3955 2355 3436 
+Q 2086 2918 1932 2384 
+Q 1779 1850 1705 1267 
+Q 1632 685 1606 0 
+L 1344 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#NotoSansTC-Thin-33"/>
+     <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
+     <use xlink:href="#NotoSansTC-Thin-31" x="75.199982"/>
+     <use xlink:href="#NotoSansTC-Thin-37" x="127.299973"/>
+    </g>
+   </g>
+   <g id="text_7">
+    <!-- 3.53 -->
+    <g style="fill: #0b0b0b" transform="translate(186.290293 142.00315) scale(0.095 -0.095)">
      <defs>
       <path id="NotoSansTC-Thin-35" d="M 1581 -83 
 Q 1222 -83 963 9 
@@ -789,44 +831,17 @@ z
      </defs>
      <use xlink:href="#NotoSansTC-Thin-33"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
-     <use xlink:href="#NotoSansTC-Thin-32" x="75.199982"/>
-     <use xlink:href="#NotoSansTC-Thin-35" x="127.299973"/>
-    </g>
-   </g>
-   <g id="text_7">
-    <!-- 3.55 -->
-    <g style="fill: #0b0b0b" transform="translate(186.294572 142.00315) scale(0.095 -0.095)">
-     <use xlink:href="#NotoSansTC-Thin-33"/>
-     <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
      <use xlink:href="#NotoSansTC-Thin-35" x="75.199982"/>
-     <use xlink:href="#NotoSansTC-Thin-35" x="127.299973"/>
+     <use xlink:href="#NotoSansTC-Thin-33" x="127.299973"/>
     </g>
    </g>
    <g id="text_8">
-    <!-- 3.57 -->
+    <!-- 3.55 -->
     <g style="fill: #0b0b0b" transform="translate(187.054015 173.094059) scale(0.095 -0.095)">
-     <defs>
-      <path id="NotoSansTC-Thin-37" d="M 1344 0 
-Q 1376 717 1462 1318 
-Q 1549 1920 1712 2445 
-Q 1875 2970 2124 3459 
-Q 2374 3949 2726 4435 
-L 307 4435 
-L 307 4646 
-L 3034 4646 
-L 3034 4512 
-Q 2624 3955 2355 3436 
-Q 2086 2918 1932 2384 
-Q 1779 1850 1705 1267 
-Q 1632 685 1606 0 
-L 1344 0 
-z
-" transform="scale(0.015625)"/>
-     </defs>
      <use xlink:href="#NotoSansTC-Thin-33"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
      <use xlink:href="#NotoSansTC-Thin-35" x="75.199982"/>
-     <use xlink:href="#NotoSansTC-Thin-37" x="127.299973"/>
+     <use xlink:href="#NotoSansTC-Thin-35" x="127.299973"/>
     </g>
    </g>
    <g id="text_9">
@@ -1915,16 +1930,16 @@ z
    </g>
    <g id="patch_9">
     <path d="M 277.86 109.849091 
-L 406.254407 109.849091 
-L 406.254407 67.876364 
+L 413.420606 109.849091 
+L 413.420606 67.876364 
 L 277.86 67.876364 
 z
 " clip-path="url(#pd6f23042be)" style="fill: #b5b3ab; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 277.86 179.803636 
-L 413.420606 179.803636 
-L 413.420606 137.830909 
+L 407.27309 179.803636 
+L 407.27309 137.830909 
 L 277.86 137.830909 
 z
 " clip-path="url(#pd6f23042be)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
@@ -2199,7 +2214,7 @@ L 277.86 62.28
    </g>
    <g id="text_12">
     <!-- 8.60 -->
-    <g style="fill: #0b0b0b" transform="translate(408.287816 91.480423) scale(0.095 -0.095)">
+    <g style="fill: #0b0b0b" transform="translate(415.454015 91.480423) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-38"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
      <use xlink:href="#NotoSansTC-Thin-36" x="75.199982"/>
@@ -2207,34 +2222,17 @@ L 277.86 62.28
     </g>
    </g>
    <g id="text_13">
-    <!-- 9.08 -->
-    <g style="fill: #0b0b0b" transform="translate(415.454015 161.434968) scale(0.095 -0.095)">
-     <use xlink:href="#NotoSansTC-Thin-39"/>
+    <!-- 8.21 -->
+    <g style="fill: #0b0b0b" transform="translate(409.306499 161.434968) scale(0.095 -0.095)">
+     <use xlink:href="#NotoSansTC-Thin-38"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
-     <use xlink:href="#NotoSansTC-Thin-30" x="75.199982"/>
-     <use xlink:href="#NotoSansTC-Thin-38" x="127.299973"/>
+     <use xlink:href="#NotoSansTC-Thin-32" x="75.199982"/>
+     <use xlink:href="#NotoSansTC-Thin-31" x="127.299973"/>
     </g>
    </g>
    <g id="text_14">
     <!-- 美股 1993–2026:最後變幾倍 -->
     <g style="fill: #0b0b0b" transform="translate(277.86 56.28) scale(0.1 -0.1)">
-     <defs>
-      <path id="NotoSansTC-Thin-31" d="M 608 0 
-L 608 211 
-L 1677 211 
-L 1677 4211 
-L 864 4211 
-L 864 4378 
-Q 1133 4422 1344 4492 
-Q 1555 4563 1702 4646 
-L 1901 4646 
-L 1901 211 
-L 2899 211 
-L 2899 0 
-L 608 0 
-z
-" transform="scale(0.015625)"/>
-     </defs>
      <use xlink:href="#NotoSansTC-Thin-7f8e"/>
      <use xlink:href="#NotoSansTC-Thin-80a1" x="99.999985"/>
      <use xlink:href="#NotoSansTC-Thin-20" x="199.999969"/>
@@ -2275,8 +2273,8 @@ z
    </g>
    <g id="patch_14">
     <path d="M 506.26 179.803636 
-L 636.785498 179.803636 
-L 636.785498 137.830909 
+L 637.753788 179.803636 
+L 637.753788 137.830909 
 L 506.26 137.830909 
 z
 " clip-path="url(#pf8c4d96d96)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
@@ -2512,32 +2510,12 @@ L 506.26 62.28
     </g>
    </g>
    <g id="text_18">
-    <!-- 6.74 -->
-    <g style="fill: #0b0b0b" transform="translate(638.818907 161.434968) scale(0.095 -0.095)">
-     <defs>
-      <path id="NotoSansTC-Thin-34" d="M 2195 0 
-L 2195 3482 
-Q 2195 3629 2204 3843 
-Q 2214 4058 2227 4205 
-L 2195 4205 
-Q 2112 4058 2019 3901 
-Q 1926 3744 1830 3590 
-L 422 1568 
-L 3110 1568 
-L 3110 1363 
-L 115 1363 
-L 115 1485 
-L 2259 4646 
-L 2419 4646 
-L 2419 0 
-L 2195 0 
-z
-" transform="scale(0.015625)"/>
-     </defs>
+    <!-- 6.79 -->
+    <g style="fill: #0b0b0b" transform="translate(639.787197 161.434968) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-36"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="52.099991"/>
      <use xlink:href="#NotoSansTC-Thin-37" x="75.199982"/>
-     <use xlink:href="#NotoSansTC-Thin-34" x="127.299973"/>
+     <use xlink:href="#NotoSansTC-Thin-39" x="127.299973"/>
     </g>
    </g>
    <g id="text_19">
@@ -2674,6 +2652,24 @@ L 282 1862
 L 1811 1862 
 L 1811 1638 
 L 282 1638 
+z
+" transform="scale(0.015625)"/>
+      <path id="NotoSansTC-Thin-34" d="M 2195 0 
+L 2195 3482 
+Q 2195 3629 2204 3843 
+Q 2214 4058 2227 4205 
+L 2195 4205 
+Q 2112 4058 2019 3901 
+Q 1926 3744 1830 3590 
+L 422 1568 
+L 3110 1568 
+L 3110 1363 
+L 115 1363 
+L 115 1485 
+L 2259 4646 
+L 2419 4646 
+L 2419 0 
+L 2195 0 
 z
 " transform="scale(0.015625)"/>
       <path id="NotoSansTC-Thin-25" d="M 1267 1818 
@@ -3156,16 +3152,16 @@ z
    </g>
    <g id="patch_23">
     <path d="M 277.86 253.609091 
-L 411.723067 253.609091 
-L 411.723067 211.636364 
+L 413.420606 253.609091 
+L 413.420606 211.636364 
 L 277.86 211.636364 
 z
 " clip-path="url(#p5af5b2c881)" style="fill: #b5b3ab; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_24">
     <path d="M 277.86 323.563636 
-L 413.420606 323.563636 
-L 413.420606 281.590909 
+L 408.263409 323.563636 
+L 408.263409 281.590909 
 L 277.86 281.590909 
 z
 " clip-path="url(#p5af5b2c881)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
@@ -3206,7 +3202,7 @@ L 277.86 206.04
    </g>
    <g id="text_31">
     <!-- -55.2% -->
-    <g style="fill: #0b0b0b" transform="translate(413.756476 235.240423) scale(0.095 -0.095)">
+    <g style="fill: #0b0b0b" transform="translate(415.454015 235.240423) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-2d"/>
      <use xlink:href="#NotoSansTC-Thin-35" x="32.399994"/>
      <use xlink:href="#NotoSansTC-Thin-35" x="84.499985"/>
@@ -3216,13 +3212,13 @@ L 277.86 206.04
     </g>
    </g>
    <g id="text_32">
-    <!-- -55.9% -->
-    <g style="fill: #0b0b0b" transform="translate(415.454015 305.194968) scale(0.095 -0.095)">
+    <!-- -53.1% -->
+    <g style="fill: #0b0b0b" transform="translate(410.296818 305.194968) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-2d"/>
      <use xlink:href="#NotoSansTC-Thin-35" x="32.399994"/>
-     <use xlink:href="#NotoSansTC-Thin-35" x="84.499985"/>
+     <use xlink:href="#NotoSansTC-Thin-33" x="84.499985"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="136.599976"/>
-     <use xlink:href="#NotoSansTC-Thin-39" x="159.699966"/>
+     <use xlink:href="#NotoSansTC-Thin-31" x="159.699966"/>
      <use xlink:href="#NotoSansTC-Thin-25" x="211.799957"/>
     </g>
    </g>
@@ -3250,16 +3246,16 @@ z
    </g>
    <g id="patch_27">
     <path d="M 506.26 253.609091 
-L 639.063991 253.609091 
-L 639.063991 211.636364 
+L 641.820606 253.609091 
+L 641.820606 211.636364 
 L 506.26 211.636364 
 z
 " clip-path="url(#pcea49dc89e)" style="fill: #b5b3ab; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_28">
     <path d="M 506.26 323.563636 
-L 641.820606 323.563636 
-L 641.820606 281.590909 
+L 628.247993 323.563636 
+L 628.247993 281.590909 
 L 506.26 281.590909 
 z
 " clip-path="url(#pcea49dc89e)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
@@ -3300,7 +3296,7 @@ L 506.26 206.04
    </g>
    <g id="text_36">
     <!-- -81.9% -->
-    <g style="fill: #0b0b0b" transform="translate(641.0974 235.240423) scale(0.095 -0.095)">
+    <g style="fill: #0b0b0b" transform="translate(643.854015 235.240423) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-2d"/>
      <use xlink:href="#NotoSansTC-Thin-38" x="32.399994"/>
      <use xlink:href="#NotoSansTC-Thin-31" x="84.499985"/>
@@ -3310,13 +3306,13 @@ L 506.26 206.04
     </g>
    </g>
    <g id="text_37">
-    <!-- -83.6% -->
-    <g style="fill: #0b0b0b" transform="translate(643.854015 305.194968) scale(0.095 -0.095)">
+    <!-- -73.7% -->
+    <g style="fill: #0b0b0b" transform="translate(630.281403 305.194968) scale(0.095 -0.095)">
      <use xlink:href="#NotoSansTC-Thin-2d"/>
-     <use xlink:href="#NotoSansTC-Thin-38" x="32.399994"/>
+     <use xlink:href="#NotoSansTC-Thin-37" x="32.399994"/>
      <use xlink:href="#NotoSansTC-Thin-33" x="84.499985"/>
      <use xlink:href="#NotoSansTC-Thin-2e" x="136.599976"/>
-     <use xlink:href="#NotoSansTC-Thin-36" x="159.699966"/>
+     <use xlink:href="#NotoSansTC-Thin-37" x="159.699966"/>
      <use xlink:href="#NotoSansTC-Thin-25" x="211.799957"/>
     </g>
    </g>
@@ -4396,7 +4392,7 @@ z
    </g>
   </g>
   <g id="text_40">
-   <!-- 自算:8. 槓桿DCA實證_佐證/tier_sgov.py(ABSOLUTE 段);10% 現金上限 -->
+   <!-- 自算:8. 槓桿DCA實證_佐證/tier_sgov.py(ABSOLUTE 段);10% 現金上限、每年再平衡 SGOV -->
    <g style="fill: #898781" transform="translate(13.824 347.21575) scale(0.08 -0.08)">
     <defs>
      <path id="NotoSansTC-Thin-81ea" d="M 1293 2957 
@@ -5652,6 +5648,328 @@ Q 2829 -346 2803 -378
 Q 2778 -410 2778 -435 
 z
 " transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-3001" d="M 3827 1638 
+Q 3610 1907 3360 2169 
+Q 3110 2432 2857 2665 
+Q 2605 2899 2374 3078 
+L 2534 3232 
+Q 2771 3046 3020 2812 
+Q 3270 2579 3523 2320 
+Q 3776 2061 4013 1792 
+L 3827 1638 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-5e74" d="M 1958 5338 
+L 2144 5286 
+Q 1958 4819 1712 4384 
+Q 1466 3949 1178 3577 
+Q 890 3206 576 2918 
+Q 557 2931 528 2953 
+Q 499 2976 467 2998 
+Q 435 3021 403 3034 
+Q 730 3315 1018 3676 
+Q 1306 4038 1546 4464 
+Q 1786 4890 1958 5338 
+z
+M 1626 4474 
+L 5811 4474 
+L 5811 4288 
+L 1530 4288 
+L 1626 4474 
+z
+M 1453 3085 
+L 5670 3085 
+L 5670 2899 
+L 1638 2899 
+L 1638 1216 
+L 1453 1216 
+L 1453 3085 
+z
+M 352 1318 
+L 6061 1318 
+L 6061 1133 
+L 352 1133 
+L 352 1318 
+z
+M 3405 4371 
+L 3597 4371 
+L 3597 -454 
+L 3405 -454 
+L 3405 4371 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-518d" d="M 314 1370 
+L 6106 1370 
+L 6106 1178 
+L 314 1178 
+L 314 1370 
+z
+M 525 4883 
+L 5888 4883 
+L 5888 4691 
+L 525 4691 
+L 525 4883 
+z
+M 1197 2630 
+L 5184 2630 
+L 5184 2438 
+L 1197 2438 
+L 1197 2630 
+z
+M 5101 3859 
+L 5286 3859 
+L 5286 -102 
+Q 5286 -250 5241 -320 
+Q 5197 -390 5075 -416 
+Q 4960 -442 4701 -448 
+Q 4442 -454 4019 -454 
+Q 4006 -416 3987 -358 
+Q 3968 -301 3936 -256 
+Q 4186 -262 4394 -262 
+Q 4602 -262 4746 -259 
+Q 4890 -256 4947 -256 
+Q 5037 -250 5069 -218 
+Q 5101 -186 5101 -102 
+L 5101 3859 
+z
+M 1101 3859 
+L 5190 3859 
+L 5190 3667 
+L 1286 3667 
+L 1286 -467 
+L 1101 -467 
+L 1101 3859 
+z
+M 3078 4813 
+L 3270 4813 
+L 3270 1280 
+L 3078 1280 
+L 3078 4813 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-5e73" d="M 704 4851 
+L 5677 4851 
+L 5677 4659 
+L 704 4659 
+L 704 4851 
+z
+M 378 2125 
+L 6029 2125 
+L 6029 1939 
+L 378 1939 
+L 378 2125 
+z
+M 1210 4192 
+L 1376 4250 
+Q 1523 3994 1664 3699 
+Q 1805 3405 1917 3129 
+Q 2029 2854 2080 2656 
+L 1907 2579 
+Q 1850 2790 1741 3065 
+Q 1632 3341 1494 3638 
+Q 1357 3936 1210 4192 
+z
+M 4992 4288 
+L 5190 4218 
+Q 5069 3942 4918 3635 
+Q 4768 3328 4614 3037 
+Q 4461 2746 4314 2528 
+L 4160 2598 
+Q 4301 2816 4457 3113 
+Q 4614 3411 4755 3724 
+Q 4896 4038 4992 4288 
+z
+M 3085 4800 
+L 3277 4800 
+L 3277 -448 
+L 3085 -448 
+L 3085 4800 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-8861" d="M 1811 1152 
+L 4442 1152 
+L 4442 966 
+L 1811 966 
+L 1811 1152 
+z
+M 2675 5299 
+L 2867 5274 
+Q 2726 4832 2473 4307 
+Q 2221 3782 1824 3347 
+Q 1798 3379 1756 3408 
+Q 1715 3437 1677 3450 
+Q 1933 3725 2125 4051 
+Q 2317 4378 2454 4701 
+Q 2592 5024 2675 5299 
+z
+M 2605 4742 
+L 3654 4742 
+L 3654 4557 
+L 2509 4557 
+L 2605 4742 
+z
+M 2266 2669 
+L 2266 1894 
+L 4038 1894 
+L 4038 2669 
+L 2266 2669 
+z
+M 2266 3616 
+L 2266 2854 
+L 4038 2854 
+L 4038 3616 
+L 2266 3616 
+z
+M 2080 3802 
+L 4230 3802 
+L 4230 1709 
+L 2080 1709 
+L 2080 3802 
+z
+M 3085 3738 
+L 3277 3738 
+L 3277 1818 
+L 3085 1818 
+L 3085 3738 
+z
+M 2963 896 
+L 3091 1011 
+Q 3322 851 3558 652 
+Q 3795 454 4000 262 
+Q 4205 70 4333 -83 
+L 4205 -218 
+Q 4077 -64 3869 131 
+Q 3661 326 3424 528 
+Q 3187 730 2963 896 
+z
+M 3590 4742 
+L 3635 4742 
+L 3667 4755 
+L 3795 4672 
+Q 3738 4493 3658 4307 
+Q 3578 4122 3494 3955 
+Q 3411 3789 3334 3661 
+Q 3309 3680 3264 3705 
+Q 3219 3731 3181 3744 
+Q 3258 3866 3334 4032 
+Q 3411 4198 3478 4374 
+Q 3546 4550 3590 4698 
+L 3590 4742 
+z
+M 3072 1587 
+L 3277 1587 
+Q 3226 1242 3123 941 
+Q 3021 640 2851 390 
+Q 2682 141 2429 -51 
+Q 2176 -243 1818 -378 
+Q 1798 -346 1763 -307 
+Q 1728 -269 1696 -243 
+Q 2157 -77 2438 192 
+Q 2720 461 2870 816 
+Q 3021 1171 3072 1587 
+z
+M 1357 5312 
+L 1549 5248 
+Q 1370 4890 1091 4493 
+Q 813 4096 531 3802 
+Q 518 3821 492 3846 
+Q 467 3872 441 3897 
+Q 416 3923 397 3936 
+Q 582 4122 761 4355 
+Q 941 4589 1097 4838 
+Q 1254 5088 1357 5312 
+z
+M 1523 4096 
+L 1709 4045 
+Q 1549 3680 1344 3315 
+Q 1139 2950 912 2624 
+Q 685 2298 454 2042 
+Q 442 2061 413 2086 
+Q 384 2112 352 2137 
+Q 320 2163 294 2176 
+Q 646 2547 972 3059 
+Q 1299 3571 1523 4096 
+z
+M 1056 3046 
+L 1235 3232 
+L 1242 3219 
+L 1242 -442 
+L 1056 -442 
+L 1056 3046 
+z
+M 4646 4832 
+L 5952 4832 
+L 5952 4640 
+L 4646 4640 
+L 4646 4832 
+z
+M 4474 3258 
+L 6061 3258 
+L 6061 3066 
+L 4474 3066 
+L 4474 3258 
+z
+M 5242 3187 
+L 5434 3187 
+L 5434 -122 
+Q 5434 -237 5402 -291 
+Q 5370 -346 5280 -378 
+Q 5203 -403 5040 -409 
+Q 4877 -416 4614 -416 
+Q 4608 -378 4589 -323 
+Q 4570 -269 4544 -224 
+Q 4768 -230 4931 -230 
+Q 5094 -230 5152 -224 
+Q 5210 -218 5226 -198 
+Q 5242 -179 5242 -128 
+L 5242 3187 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-47" d="M 2355 -83 
+Q 1766 -83 1324 217 
+Q 883 518 640 1062 
+Q 397 1606 397 2336 
+Q 397 2886 541 3328 
+Q 685 3770 953 4083 
+Q 1222 4397 1593 4563 
+Q 1965 4730 2426 4730 
+Q 2893 4730 3190 4550 
+Q 3488 4371 3667 4179 
+L 3520 4019 
+Q 3341 4218 3078 4362 
+Q 2816 4506 2426 4506 
+Q 1875 4506 1475 4240 
+Q 1075 3974 860 3488 
+Q 646 3002 646 2336 
+Q 646 1670 854 1177 
+Q 1062 685 1449 413 
+Q 1837 141 2374 141 
+Q 2707 141 3001 240 
+Q 3296 339 3469 512 
+L 3469 2035 
+L 2323 2035 
+L 2323 2246 
+L 3718 2246 
+L 3718 435 
+Q 3501 205 3155 61 
+Q 2810 -83 2355 -83 
+z
+" transform="scale(0.015625)"/>
+     <path id="NotoSansTC-Thin-56" d="M 1587 0 
+L 45 4646 
+L 294 4646 
+L 1190 1869 
+Q 1325 1440 1437 1085 
+Q 1549 730 1696 301 
+L 1722 301 
+Q 1869 730 1981 1085 
+Q 2093 1440 2234 1869 
+L 3123 4646 
+L 3366 4646 
+L 1830 0 
+L 1587 0 
+z
+" transform="scale(0.015625)"/>
     </defs>
     <use xlink:href="#NotoSansTC-Thin-81ea"/>
     <use xlink:href="#NotoSansTC-Thin-7b97" x="99.999985"/>
@@ -5703,6 +6021,17 @@ z
     <use xlink:href="#NotoSansTC-Thin-91d1" x="2733.199493"/>
     <use xlink:href="#NotoSansTC-Thin-4e0a" x="2833.199478"/>
     <use xlink:href="#NotoSansTC-Thin-9650" x="2933.199463"/>
+    <use xlink:href="#NotoSansTC-Thin-3001" x="3033.199448"/>
+    <use xlink:href="#NotoSansTC-Thin-6bcf" x="3133.199432"/>
+    <use xlink:href="#NotoSansTC-Thin-5e74" x="3233.199417"/>
+    <use xlink:href="#NotoSansTC-Thin-518d" x="3333.199402"/>
+    <use xlink:href="#NotoSansTC-Thin-5e73" x="3433.199387"/>
+    <use xlink:href="#NotoSansTC-Thin-8861" x="3533.199371"/>
+    <use xlink:href="#NotoSansTC-Thin-20" x="3633.199356"/>
+    <use xlink:href="#NotoSansTC-Thin-53" x="3655.199341"/>
+    <use xlink:href="#NotoSansTC-Thin-47" x="3712.099335"/>
+    <use xlink:href="#NotoSansTC-Thin-4f" x="3778.199326"/>
+    <use xlink:href="#NotoSansTC-Thin-56" x="3849.599319"/>
    </g>
   </g>
  </g>
