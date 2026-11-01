@@ -7,7 +7,7 @@
 | 腳本 | 對應文件 | 產生的數字 | 範例 |
 |---|---|---|---|
 | `f2_recalc.py` | 檔 2 | 0050 vs 連結基金 10 年內扣、交易、稅務成本;各稅率級距總成本;二代健保門檻本金 | `python f2_recalc.py --out f2.txt`(預設殖利率 1.24%;`--yld 0.025` 為敏感度) |
-| `f3_case_recalc.py` | 檔 3 第六節 | VWRA 換 ACWD / VALU 三條路線 10 年終值 | `python f3_case_recalc.py --tv 0.14 --ta 0.12 --out acwd.txt`;`--ta 0.07` 為 VALU |
+| `f3_case_recalc.py` | 檔 3 換股案例 | VWRA 換 VALU 三條路線 10 年終值 | `python f3_case_recalc.py --tv 0.14 --ta 0.07 --out valu.txt` |
 | `f4_recalc.py` | 檔 4 | AVGS vs AVUV+AVDV 年拖累(含 AVDV 來源國那層)、10 年情境 | `python f4_recalc.py --out f4.txt` |
 | `f_misc.py` | 檔 0、1、4、6、8、Sin A Little | 雜項驗算:BTC 換倉 10 年優勢、槓桿耗損公式、BTC 權重漂移、XBI 報酬等 | `python f_misc.py --out misc.txt` |
 | `f8_2008.py` | 檔 8 | 2007-10 → 2009-03 SPY / SSO 跌幅、衛星部位對總資產的額外拖累 | `python f8_2008.py --spy "../8. 槓桿DCA實證_佐證/spy.csv" --sso "../8. 槓桿DCA實證_佐證/sso.csv" --out f8.txt` |

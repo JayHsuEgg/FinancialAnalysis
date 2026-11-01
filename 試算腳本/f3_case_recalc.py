@@ -1,4 +1,4 @@
-"""Recompute file 3 section 6 (VWRA -> ACWD switch) with VWRA TER 0.14%.
+"""Recompute the file 3 switch case (VWRA -> another Irish fund, e.g. VALU at --ta 0.07).
 
 Convention reproduces the original table exactly when tv=0.19%:
 monthly rate (1+g-TER)^(1/12)-1, contribution at month start, 0.15% fee on
@@ -9,7 +9,7 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("--out", required=True)
 ap.add_argument("--tv", type=float, default=0.14)
-ap.add_argument("--ta", type=float, default=0.12)
+ap.add_argument("--ta", type=float, default=0.07, help="TER %% of the fund switched to (VALU 0.07)")
 a = ap.parse_args()
 C = 0.0015
 
@@ -34,7 +34,7 @@ def sim(g, route, tv, ta):
 
 L = []
 for tv in (0.19, a.tv):
-    L.append(f"VWRA TER {tv}% vs ACWD {a.ta}%")
+    L.append(f"VWRA TER {tv}% vs new fund {a.ta}%")
     for g in (0.05, 0.07, 0.09):
         r = [sim(g, k, tv, a.ta) for k in (1, 2, 3)]
         L.append(f"  g={g:.0%}: r1={r[0]:,.0f} r2={r[1]:,.0f} ({r[1]-r[0]:+,.0f}) r3={r[2]:,.0f} ({r[2]-r[0]:+,.0f})")
