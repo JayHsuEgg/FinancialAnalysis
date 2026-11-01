@@ -30,6 +30,7 @@
 | `cohort.py` | 世代穩健性：滾動多個起始日各跑到資料末，算勝率與中位 edge，擋「單一好運起點」偏誤 | 各市場勝率/中位 edge 表 |
 | `cap_test.py` | 硬上限熔斷測試（鐵則④）：對最慘路徑（日經 1970 起、坐在 1989 泡沫頂）測上限能否鎖住曝險、犧牲多少報酬 | 上限前後曝險/報酬對比 |
 | `validate_lev.py` | 引擎校準：模擬槓桿 vs 真實 LETF 逐日對帳（相關性、tracking error、終值差） | 校準報告文字檔 |
+| `tier_sgov.py` | 實際執行規則：10% SGOV 乾火藥、-20/-30/-50% 三段動用 + 新錢切換 + 現金上限；含「SGOV 改買 1x」對照組與滾動世代 | 各市場 A/B/C/D 比較表 + 世代表（`--exp 0.0075` 為 WLDU 費用率） |
 | `fetch_yahoo.py` | 輔助：從 Yahoo Finance 抓全歷史日頻 adjclose（產生 vt/spy/n225/sso/upro/irx 等） | 標的 csv（`Date,AdjClose`） |
 | `shiller_to_tr.py` | 輔助：把 Shiller 原始月頻資料（`shiller_raw.csv`）轉成 S&P 月頻 total-return 指數 | `spx_tr_monthly.csv` |
 
@@ -64,6 +65,9 @@ python strategy_sim.py --under spx_tr_monthly.csv --name SP --lev 2 --calib 0.00
 python matrix.py --out matrix.txt
 python cohort.py --out cohort.txt
 python cap_test.py --out cap.txt
+
+# 實際執行規則（三段 SGOV + 新錢，WLDU 費用率）
+python tier_sgov.py --exp 0.0075 --out tier.txt
 ```
 
 資料路徑：`matrix.py`、`cohort.py`、`cap_test.py` 的市場資料與所有腳本的 `irx.csv` 都從**腳本所在資料夾**讀取；
