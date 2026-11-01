@@ -37,6 +37,11 @@ the data date, the access date and the source type. Keep it in sync:
   `8. 槓桿DCA實證_佐證/`). New calculations go into `試算腳本/` with argparse inputs and outputs —
   no hardcoded local paths.
 - Paper figures cite the page of the PDF in `paper/` (physical page order, cover = p.1).
+- Write ranges with an en dash (`2–5%`) or 「到」, never `~`. GitHub renders two single tildes
+  in one paragraph as strikethrough (`+12~30%、…+2~5%` showed up as "+1230%…+25%" with the
+  middle struck out). A leading `~` for "about" (`~1.5%`) is fine.
+- When two numbers mean different settings (2x vs 3x, two vehicles), label each one —
+  `+12.0%(2x)/ +30.4%(3x)` — instead of writing them as a range.
 
 ## Public repo: no personal information — and do not ask for it
 
