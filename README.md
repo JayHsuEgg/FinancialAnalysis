@@ -42,10 +42,10 @@
 | 平台 | 用途 | 手續費 |
 |---|---|---|
 | **Firstrade** | 美股 / 美國註冊標的（VT、SGOV、IBIT、AVUV/AVDV） | **交易 0 手續費** |
-| **富邦複委託** | 英股 / 愛爾蘭 UCITS（VWRA、AVGS、IB01 等 LSE 掛牌） | **買賣各 0.15%** |
+| **富邦複委託** | 英股 / 愛爾蘭 UCITS（VWRA、AVGS、IB01、VALU〔富邦代號 VAVALU〕等 LSE 掛牌） | **買賣各 0.15%** |
 
 - **稅務要點**：美股股息對台灣人（NRA）預扣 **30%**、愛爾蘭 UCITS 基金層僅 **15%**；美國 situs 資產 >$60k 超出部分課 **18–40%** 美國遺產稅，愛爾蘭 UCITS 豁免。
-- **SGOV 特例**：ETF 配出的美國公債利息屬「interest-related dividends」，依 IRC 871(k)(1) 對 NRA **免預扣**（前提是基金有指定、券商照辦；Firstrade 實測 0%）。
+- **SGOV 特例**：ETF 配出的美國公債利息屬「interest-related dividends」，依 IRC 871(k)(1) 對 NRA **免預扣**（前提是基金有指定、券商照辦；作者在 Firstrade 與富邦複委託實測最終稅負皆 0%）。
 
 ## 📚 文件目錄
 
