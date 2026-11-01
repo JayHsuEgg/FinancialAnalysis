@@ -14,9 +14,10 @@ sleeve's CURRENT MARKET VALUE as a share of the WHOLE portfolio's market value.
 If it is already >= cap, this month's money goes to prototype instead (circuit
 breaker tripped). This is mark-to-market, the honest version of "<=10-15% of total".
 """
-import argparse, sys
+import argparse, os, sys
 import pandas as pd, numpy as np
 sys.stdout.reconfigure(encoding="utf-8")
+HERE = os.path.dirname(os.path.abspath(__file__)) + os.sep  # data csvs live next to this script
 
 p = argparse.ArgumentParser()
 p.add_argument("--out", required=True)
@@ -26,7 +27,7 @@ IRX = None
 def get_irx():
     global IRX
     if IRX is None:
-        d = pd.read_csv(r"C:\tmp\inv\irx.csv"); d["Date"] = pd.to_datetime(d["Date"])
+        d = pd.read_csv(HERE + r"irx.csv"); d["Date"] = pd.to_datetime(d["Date"])
         IRX = d.set_index("Date")["AdjClose"]
     return IRX
 
@@ -92,9 +93,9 @@ def run(df, trigger, recover, freq, cap=None, captype="mkt"):
         edge=(strat/base-1)*100, tripped=tripped)
 
 MARKETS = [
-    ("VT 全球",      r"C:\tmp\inv\vt.csv",            "daily",  None),
-    ("S&P 1970",     r"C:\tmp\inv\spy.csv",           "daily",  None),
-    ("日經 1970",    r"C:\tmp\inv\n225.csv",          "daily",  0.005),
+    ("VT 全球",      HERE + r"vt.csv",            "daily",  None),
+    ("S&P 1970",     HERE + r"spy.csv",           "daily",  None),
+    ("日經 1970",    HERE + r"n225.csv",          "daily",  0.005),
 ]
 CALIB = {2: 0.0065, 3: 0.012}
 

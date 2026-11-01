@@ -1,6 +1,7 @@
-import argparse, sys
+import argparse, os, sys
 import pandas as pd, numpy as np
 sys.stdout.reconfigure(encoding="utf-8")
+HERE = os.path.dirname(os.path.abspath(__file__)) + os.sep  # data csvs live next to this script
 p = argparse.ArgumentParser()
 p.add_argument("--under", required=True, help="underlying total-return csv (SPY)")
 p.add_argument("--real", required=True, help="real LETF csv (SSO or UPRO)")
@@ -17,7 +18,7 @@ def load(path, col):
 
 u = load(args.under, "u")
 real = load(args.real, "real")
-irx = load(r"C:\tmp\inv\irx.csv", "irx")
+irx = load(HERE + r"irx.csv", "irx")
 df = u.join(real, how="inner").join(irx, how="left")
 df["irx"] = df["irx"].ffill() / 100.0
 df["r_u"] = df["u"].pct_change()

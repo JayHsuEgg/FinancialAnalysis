@@ -10,9 +10,10 @@ Key columns:
   base x        : baseline = 100% prototype DCA
   edge          : strategy vs baseline
 """
-import argparse, sys
+import argparse, os, sys
 import pandas as pd, numpy as np
 sys.stdout.reconfigure(encoding="utf-8")
+HERE = os.path.dirname(os.path.abspath(__file__)) + os.sep  # data csvs live next to this script
 
 p = argparse.ArgumentParser()
 p.add_argument("--out", required=True)
@@ -22,7 +23,7 @@ IRX = None
 def get_irx():
     global IRX
     if IRX is None:
-        d = pd.read_csv(r"C:\tmp\inv\irx.csv"); d["Date"] = pd.to_datetime(d["Date"])
+        d = pd.read_csv(HERE + r"irx.csv"); d["Date"] = pd.to_datetime(d["Date"])
         IRX = d.set_index("Date")["AdjClose"]
     return IRX
 
@@ -73,10 +74,10 @@ def sim(path, lev, calib, trigger, recover, freq, fixrate=None, exp=0.0091):
                 start=idx[0].date(), end=T.date())
 
 MARKETS = [
-    ("VT 全球",        r"C:\tmp\inv\vt.csv",            "daily",  None),
-    ("S&P 1970",       r"C:\tmp\inv\spy.csv",           "daily",  None),
-    ("S&P 1927長史(月)", r"C:\tmp\inv\spx_tr_monthly.csv","monthly",None),
-    ("日經 ZIRP",      r"C:\tmp\inv\n225.csv",          "daily",  0.005),
+    ("VT 全球",        HERE + r"vt.csv",            "daily",  None),
+    ("S&P 1970",       HERE + r"spy.csv",           "daily",  None),
+    ("S&P 1927長史(月)", HERE + r"spx_tr_monthly.csv","monthly",None),
+    ("日經 ZIRP",      HERE + r"n225.csv",          "daily",  0.005),
 ]
 CALIB = {2: 0.0065, 3: 0.012}
 TRIGGERS = [0.20, 0.30, 0.40, 0.50]

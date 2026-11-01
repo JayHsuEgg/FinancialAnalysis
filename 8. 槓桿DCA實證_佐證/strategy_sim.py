@@ -16,9 +16,10 @@ Frequency:
   - monthly csv (Shiller) -> DCA every row; leverage modeled at monthly step with
     analytic vol-drag note (monthly understates daily-reset drag -> OPTIMISTIC for leverage).
 """
-import argparse, sys
+import argparse, os, sys
 import pandas as pd, numpy as np
 sys.stdout.reconfigure(encoding="utf-8")
+HERE = os.path.dirname(os.path.abspath(__file__)) + os.sep  # data csvs live next to this script
 
 p = argparse.ArgumentParser()
 p.add_argument("--under", required=True, help="underlying total-return csv")
@@ -41,7 +42,7 @@ u = load(args.under, "u")
 if args.fixrate is not None:
     u["irx"] = args.fixrate
 else:
-    irx = load(r"C:\tmp\inv\irx.csv", "irx")
+    irx = load(HERE + r"irx.csv", "irx")
     u = u.join(irx, how="left"); u["irx"] = u["irx"].ffill() / 100.0
     u["irx"] = u["irx"].fillna(0.04)  # pre-1954 / gaps: assume 4% short rate
 
