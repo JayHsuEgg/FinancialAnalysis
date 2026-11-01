@@ -36,6 +36,9 @@ p.add_argument("--calib", type=float, default=0.0065, help="extra annual frictio
 p.add_argument("--sgov-share", type=float, default=0.10, help="share of each contribution sent to SGOV")
 p.add_argument("--cap", type=float, default=0.10, help="cash cap as share of cumulative contributions")
 p.add_argument("--no-cohorts", action="store_true", help="skip the rolling-cohort section")
+p.add_argument("--leg-csv", help="use a REAL leveraged ETF's daily prices (csv in this folder, e.g. sso.csv) "
+                                 "for the leveraged leg instead of the 2x model; triggers and prototype stay on --market")
+p.add_argument("--market", choices=["all", "vt", "spy", "n225", "spx"], default="all")
 args = p.parse_args()
 
 IRX = None
@@ -53,8 +56,14 @@ def prep(path, freq, fixrate):
     df["fin"] = fixrate if fixrate is not None else irx_real   # leverage financing rate
     df["cash"] = irx_real                                       # SGOV yield (always the real T-bill)
     per = 252.0 if freq == "daily" else 12.0
+    if args.leg_csv:
+        leg = pd.read_csv(HERE + args.leg_csv); leg["Date"] = pd.to_datetime(leg["Date"])
+        df = df.join(leg.set_index("Date")["AdjClose"].rename("leg"), how="inner")
     df["r_u"] = df["u"].pct_change()
-    df["r_l"] = 2.0 * df["r_u"] - (args.exp + df["fin"] + args.calib) / per
+    if args.leg_csv:
+        df["r_l"] = df["leg"].pct_change()      # real ETF: all fees and frictions already inside
+    else:
+        df["r_l"] = 2.0 * df["r_u"] - (args.exp + df["fin"] + args.calib) / per
     df["r_s"] = df["cash"] / per
     return df.dropna(subset=["r_u", "r_l"]).copy()
 
@@ -114,11 +123,12 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True):
                 max_pct=max_lev_share * 100, fires=n_fire)
 
 MARKETS = [
-    ("VT 全球 2008-", HERE + "vt.csv", "daily", None),
-    ("S&P 1993-", HERE + "spy.csv", "daily", None),
-    ("日經 1970-(融資 0.5%)", HERE + "n225.csv", "daily", 0.005),
-    ("S&P 1927-(月頻)", HERE + "spx_tr_monthly.csv", "monthly", None),
+    ("VT 全球 2008-", HERE + "vt.csv", "daily", None, "vt"),
+    ("S&P 1993-", HERE + "spy.csv", "daily", None, "spy"),
+    ("日經 1970-(融資 0.5%)", HERE + "n225.csv", "daily", 0.005, "n225"),
+    ("S&P 1927-(月頻)", HERE + "spx_tr_monthly.csv", "monthly", None, "spx"),
 ]
+MARKETS = [m for m in MARKETS if args.market in ("all", m[4])]
 CONFIGS = [  # (label, use_tiers, use_newmoney, tier_to_lev)
     ("A 已回測版:只改新錢(-30%/80%)", False, True, True),
     ("B 只用 SGOV 三段(買 2x)", True, False, True),
@@ -126,10 +136,11 @@ CONFIGS = [  # (label, use_tiers, use_newmoney, tier_to_lev)
     ("D 對照:SGOV 三段改買原型 1x", True, False, False),
 ]
 
-L = [f"TIERED SGOV BACKTEST  exp={args.exp:.2%} calib={args.calib:.2%} sgov_share={args.sgov_share:.0%} cash cap={args.cap:.0%}",
+leg_txt = f"REAL leg {args.leg_csv}" if args.leg_csv else f"2x model exp={args.exp:.2%} calib={args.calib:.2%}"
+L = [f"TIERED SGOV BACKTEST  {leg_txt} sgov_share={args.sgov_share:.0%} cash cap={args.cap:.0%}",
      "edge = strategy vs baseline with the same SGOV share and no leverage",
      "cash% = cumulative cash into leverage / contributions; end% / max% = leverage market-value share at end / at worst\n"]
-for mname, path, freq, fr in MARKETS:
+for mname, path, freq, fr, _ in MARKETS:
     df = prep(path, freq, fr)
     L.append(f"################ {mname}  {df.index[0].date()}..{df.index[-1].date()} ################")
     L.append(f"{'config':<34} {'cap':>5} | {'cash%':>6} {'end%':>6} {'max%':>6} | {'strat':>9} {'base':>9} | {'edge':>8} | fires")
@@ -143,7 +154,7 @@ for mname, path, freq, fr in MARKETS:
 if not args.no_cohorts:
     L.append("ROLLING COHORTS (start every 12 months, run to data end), config C with cash cap")
     L.append(f"{'market':<26} | cohorts | win%  | edge med   p25    min    max | no-lev")
-    for mname, path, freq, fr in MARKETS[:3]:
+    for mname, path, freq, fr, _ in [m for m in MARKETS if m[2] == "daily"]:
         df = prep(path, freq, fr)
         starts = pd.date_range(df.index[0], df.index[-1], freq="12MS")
         res = []

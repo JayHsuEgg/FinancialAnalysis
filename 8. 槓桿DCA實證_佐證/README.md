@@ -68,6 +68,8 @@ python cap_test.py --out cap.txt
 
 # 實際執行規則（三段 SGOV + 新錢，WLDU 費用率）
 python tier_sgov.py --exp 0.0075 --out tier.txt
+# 同樣的規則，槓桿腳改用真實 SSO 價格（觸發與原型仍用 VT）
+python tier_sgov.py --market vt --leg-csv sso.csv --out tier_vt_sso.txt
 ```
 
 資料路徑：`matrix.py`、`cohort.py`、`cap_test.py` 的市場資料與所有腳本的 `irx.csv` 都從**腳本所在資料夾**讀取；
