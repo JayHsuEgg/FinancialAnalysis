@@ -75,21 +75,40 @@ def prep(path, freq, fixrate):
 TIERS = (0.20, 0.30, 0.50)
 FRACS = (1/3, 1/2, 1.0)
 
-def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True):
+def irr(dates, flows):
+    """Money-weighted annual return: solve sum(flow / (1+r)^years) = 0 by bisection."""
+    t = np.array([(d - dates[0]).days / 365.25 for d in dates]); f = np.array(flows)
+    lo, hi = -0.99, 1.0
+    for _ in range(200):
+        mid = (lo + hi) / 2
+        if (f / (1 + mid) ** t).sum() > 0:
+            lo = mid
+        else:
+            hi = mid
+    return mid
+
+def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True, sgov_share=None):
     idx = sub.index
     if freq == "daily":
         months = pd.date_range(idx[0], idx[-1], freq="MS")
         buyset = set(idx[idx.get_indexer([m], method="nearest")[0]] for m in months)
     else:
         buyset = set(idx)
+    s_share = args.sgov_share if sgov_share is None else sgov_share
     proto = lev = sgov = 0.0                  # market values
     b_proto = b_sgov = 0.0                    # baseline market values
     inv = lev_cash = 0.0
     peak = -np.inf; fired = set(); state = "NORMAL"
     n_fire = 0; max_lev_share = 0.0
+    twr = twr_peak = 1.0; twr_mdd = 0.0      # time-weighted index: drawdown without the effect of new money
+    flow_dates, flows = [], []
     for dt, row in sub.iterrows():
+        before = proto + lev + sgov
         proto *= 1 + row["r_u"]; lev *= 1 + row["r_l"]; sgov *= 1 + row["r_s"]
         b_proto *= 1 + row["r_u"]; b_sgov *= 1 + row["r_s"]
+        if before > 0:
+            twr *= (proto + lev + sgov) / before
+            twr_peak = max(twr_peak, twr); twr_mdd = min(twr_mdd, twr / twr_peak - 1.0)
         if row["u"] >= peak:
             peak = row["u"]; fired = set()
         dd = row["u"] / peak - 1.0
@@ -98,8 +117,8 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True):
         elif state == "LEVERAGED" and row["u"] >= 0.80 * peak:
             state = "NORMAL"
         if dt in buyset:
-            inv += 1.0
-            s_part = args.sgov_share; e_part = 1.0 - s_part
+            inv += 1.0; flow_dates.append(dt); flows.append(-1.0)
+            s_part = s_share; e_part = 1.0 - s_part
             sgov += s_part; b_sgov += s_part; b_proto += e_part
             room = (cap * inv - lev_cash) if cap is not None else np.inf
             if use_newmoney and state == "LEVERAGED" and room >= e_part:
@@ -123,9 +142,11 @@ def run(sub, freq, use_tiers, use_newmoney, cap, tier_to_lev=True):
         if tot > 0:
             max_lev_share = max(max_lev_share, lev / tot)
     strat = proto + lev + sgov; base = b_proto + b_sgov
+    flow_dates.append(idx[-1]); flows.append(strat)
     return dict(strat_x=strat / inv, base_x=base / inv, edge=(strat / base - 1) * 100,
                 cash_pct=lev_cash / inv * 100, end_pct=lev / strat * 100,
-                max_pct=max_lev_share * 100, fires=n_fire)
+                max_pct=max_lev_share * 100, fires=n_fire,
+                irr=irr(flow_dates, flows) * 100, mdd=twr_mdd * 100)
 
 MARKETS = [
     ("VT 全球 2008-", HERE + "vt.csv", "daily", None, "vt"),
@@ -159,6 +180,17 @@ for mname, path, freq, fr, _ in MARKETS:
             r = run(df, freq, ut, un, cap, tl)
             L.append(f"{cname:<34} {('%.0f%%' % (cap*100)) if cap else 'none':>5} | {r['cash_pct']:>5.1f}% {r['end_pct']:>5.1f}% {r['max_pct']:>5.1f}% | "
                      f"{r['strat_x']:>8.2f}x {r['base_x']:>8.2f}x | {r['edge']:>+7.1f}% | {r['fires']}")
+    L.append("")
+    # absolute view: what each choice actually returned, including "never use leverage"
+    L.append(f"  ABSOLUTE  {'choice':<40} | {'end x':>8} | {'IRR/yr':>7} | {'max DD':>7} | {'lev max%':>8}")
+    rows = [
+        ("0 只買原型 100%(無 SGOV、無槓桿)", run(df, freq, False, False, None, True, 0.0)),
+        ("1 原型 90% + SGOV 10%,SGOV 不動用", run(df, freq, False, False, None, True)),
+        ("2 SGOV 三段改買原型 1x(不用槓桿)", run(df, freq, True, False, None, False)),
+        (f"3 實際規則 + 2x 槓桿({args.cap:.0%} 現金上限)", run(df, freq, True, True, args.cap, True)),
+    ]
+    for lbl, r in rows:
+        L.append(f"  ABSOLUTE  {lbl:<40} | {r['strat_x']:>7.2f}x | {r['irr']:>6.2f}% | {r['mdd']:>6.1f}% | {r['max_pct']:>7.1f}%")
     L.append("")
 
 if not args.no_cohorts:
