@@ -94,7 +94,7 @@ def run(df, trigger, recover, freq, cap=None, captype="mkt"):
 
 MARKETS = [
     ("VT 全球",      HERE + r"vt.csv",            "daily",  None),
-    ("S&P 1970",     HERE + r"spy.csv",           "daily",  None),
+    ("S&P 1993",     HERE + r"spy.csv",           "daily",  None),
     ("日經 1970",    HERE + r"n225.csv",          "daily",  0.005),
 ]
 CALIB = {2: 0.0065, 3: 0.012}

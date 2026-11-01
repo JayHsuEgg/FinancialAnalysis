@@ -75,7 +75,7 @@ def sim(path, lev, calib, trigger, recover, freq, fixrate=None, exp=0.0091):
 
 MARKETS = [
     ("VT 全球",        HERE + r"vt.csv",            "daily",  None),
-    ("S&P 1970",       HERE + r"spy.csv",           "daily",  None),
+    ("S&P 1993",       HERE + r"spy.csv",           "daily",  None),
     ("S&P 1927長史(月)", HERE + r"spx_tr_monthly.csv","monthly",None),
     ("日經 ZIRP",      HERE + r"n225.csv",          "daily",  0.005),
 ]

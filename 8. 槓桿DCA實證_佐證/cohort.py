@@ -69,7 +69,7 @@ def run_from(df, start, trigger, recover, freq):
 
 MARKETS=[
     ("VT 全球",        HERE + r"vt.csv",            "daily",  None),
-    ("S&P 1970",       HERE + r"spy.csv",           "daily",  None),
+    ("S&P 1993",       HERE + r"spy.csv",           "daily",  None),
     ("S&P 1927(月)",   HERE + r"spx_tr_monthly.csv","monthly",None),
     ("日經 ZIRP",      HERE + r"n225.csv",          "daily",  0.005),
 ]
@@ -81,7 +81,7 @@ L.append("COHORT ROBUSTNESS: rolling start dates (every 12 months), trigger -30%
 L.append("win = strategy beats pure-prototype DCA at that cohort's horizon\n")
 for mname,path,freq,fr in MARKETS:
     L.append(f"################ {mname} ({freq}) ################")
-    L.append(f"{'cfg':>14} | {'cohorts':>7} | {'winrate':>7} | {'edge med':>9} {'edge p25':>9} {'edge p75':>9} | {'lev$% med':>9}")
+    L.append(f"{'cfg':>14} | {'cohorts':>7} | {'winrate':>7} | {'edge med':>9} {'edge p25':>9} {'edge p75':>9} {'edge min':>9} | {'lev$% med':>9} | {'no-trig':>7}")
     for lev,tr,rc in CONFIGS:
         df=prep(path,lev,CALIB[lev],freq,fr)
         starts=pd.date_range(df.index[0],df.index[-1],freq="12MS")
@@ -91,8 +91,10 @@ for mname,path,freq,fr in MARKETS:
             L.append(f"  {lev}x rec{int(rc*100)}% | no cohorts"); continue
         edges=np.array([r["edge"] for r in res]); levp=np.array([r["levpct"] for r in res])
         wr=(edges>0).mean()*100
+        notrig=int((levp==0).sum())  # cohorts that never entered LEVERAGED: edge is exactly 0, not a loss
         L.append(f"  {lev}x t30 r{int(rc*100):>3} | {len(res):>7} | {wr:>6.1f}% | "
-                 f"{np.median(edges):>+8.1f}% {np.percentile(edges,25):>+8.1f}% {np.percentile(edges,75):>+8.1f}% | {np.median(levp):>7.1f}%")
+                 f"{np.median(edges):>+8.1f}% {np.percentile(edges,25):>+8.1f}% {np.percentile(edges,75):>+8.1f}% {edges.min():>+8.1f}% | "
+                 f"{np.median(levp):>7.1f}% | {notrig:>7}")
     L.append("")
 txt="\n".join(L)
 with open(args.out,"w",encoding="utf-8") as f: f.write(txt)
