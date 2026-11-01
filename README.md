@@ -99,6 +99,8 @@
 
 ## 📖 參考資料
 
+> 各篇文件中每個查證過的數字,出處網址、資料日期與查證日期見 [`資料來源紀錄.md`](./資料來源紀錄.md);自行計算的數字由 [`試算腳本/`](./試算腳本/) 與 [`8. 槓桿DCA實證_佐證/`](./8.%20槓桿DCA實證_佐證/) 產生。
+
 - Anarkulova, A., Cederburg, S., & O'Doherty, M. S. (rev. 2025-07-10). *Beyond the Status Quo: A Critical Assessment of Lifecycle Investment Advice*. SSRN 4590406. （論文全文見 [`paper/`](./paper/)）
 - Bogle, J. C. (2007). *The Little Book of Common Sense Investing*.
 - Malkiel, B. G. (2019). *A Random Walk Down Wall Street*.

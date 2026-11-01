@@ -4,3 +4,5 @@
 aizhan\.anarkulova@emory\.edu
 cederburg@arizona\.edu
 odohertym@missouri\.edu
+# FTSE Russell index-notice URL path (research.ftserussell.com/.../index-notices/home/getnotice/) cited in 資料來源紀錄.md:
+/home/getnotice
