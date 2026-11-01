@@ -22,6 +22,22 @@ this repo. A review that flags any of them as "missing" is wrong for this repo:
 In scope: what to hold and why, vehicle and tax choices, allocation, rebalancing,
 withdrawal / decumulation rules, behavioural discipline, and the evidence behind them.
 
+## Numbers must carry their sources
+
+`資料來源紀錄.md` records, for every verified figure in the repo, the source URL (or paper page),
+the data date, the access date and the source type. Keep it in sync:
+
+- **When you add or change a number in any document, update its row in `資料來源紀錄.md` in the
+  same commit** — new URL, new data date, access date = the day you actually opened the page.
+  A changed number with a stale source row is a defect.
+- Record only pages you actually opened. If you only saw a search-engine snippet, mark it
+  "🔎 僅搜尋摘要"; if nothing could be verified, say so in the row and in the record's
+  "已知缺口" section. Never invent or reconstruct a URL.
+- Self-calculated numbers point to the script that produces them (`試算腳本/` or
+  `8. 槓桿DCA實證_佐證/`). New calculations go into `試算腳本/` with argparse inputs and outputs —
+  no hardcoded local paths.
+- Paper figures cite the page of the PDF in `paper/` (physical page order, cover = p.1).
+
 ## Public repo: no personal information — and do not ask for it
 
 - Do not ask about, suggest documenting, or flag as a risk: the owner's employer, job,
