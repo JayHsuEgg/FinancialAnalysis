@@ -38,6 +38,8 @@ p.add_argument("--cap", type=float, default=0.10, help="cash cap as share of cum
 p.add_argument("--no-cohorts", action="store_true", help="skip the rolling-cohort section")
 p.add_argument("--leg-csv", help="use a REAL leveraged ETF's daily prices (csv in this folder, e.g. sso.csv) "
                                  "for the leveraged leg instead of the 2x model; triggers and prototype stay on --market")
+p.add_argument("--leg-under", help="model the leveraged leg as 2x of ANOTHER index (csv in this folder, e.g. spy.csv) "
+                                   "with --exp/--calib; triggers and prototype stay on --market")
 p.add_argument("--market", choices=["all", "vt", "spy", "n225", "spx"], default="all")
 args = p.parse_args()
 
@@ -56,12 +58,15 @@ def prep(path, freq, fixrate):
     df["fin"] = fixrate if fixrate is not None else irx_real   # leverage financing rate
     df["cash"] = irx_real                                       # SGOV yield (always the real T-bill)
     per = 252.0 if freq == "daily" else 12.0
-    if args.leg_csv:
-        leg = pd.read_csv(HERE + args.leg_csv); leg["Date"] = pd.to_datetime(leg["Date"])
+    leg_path = args.leg_csv or args.leg_under
+    if leg_path:
+        leg = pd.read_csv(HERE + leg_path); leg["Date"] = pd.to_datetime(leg["Date"])
         df = df.join(leg.set_index("Date")["AdjClose"].rename("leg"), how="inner")
     df["r_u"] = df["u"].pct_change()
     if args.leg_csv:
         df["r_l"] = df["leg"].pct_change()      # real ETF: all fees and frictions already inside
+    elif args.leg_under:
+        df["r_l"] = 2.0 * df["leg"].pct_change() - (args.exp + df["fin"] + args.calib) / per
     else:
         df["r_l"] = 2.0 * df["r_u"] - (args.exp + df["fin"] + args.calib) / per
     df["r_s"] = df["cash"] / per
@@ -136,7 +141,12 @@ CONFIGS = [  # (label, use_tiers, use_newmoney, tier_to_lev)
     ("D 對照:SGOV 三段改買原型 1x", True, False, False),
 ]
 
-leg_txt = f"REAL leg {args.leg_csv}" if args.leg_csv else f"2x model exp={args.exp:.2%} calib={args.calib:.2%}"
+if args.leg_csv:
+    leg_txt = f"REAL leg {args.leg_csv}"
+elif args.leg_under:
+    leg_txt = f"2x model of {args.leg_under} exp={args.exp:.2%} calib={args.calib:.2%}"
+else:
+    leg_txt = f"2x model exp={args.exp:.2%} calib={args.calib:.2%}"
 L = [f"TIERED SGOV BACKTEST  {leg_txt} sgov_share={args.sgov_share:.0%} cash cap={args.cap:.0%}",
      "edge = strategy vs baseline with the same SGOV share and no leverage",
      "cash% = cumulative cash into leverage / contributions; end% / max% = leverage market-value share at end / at worst\n"]

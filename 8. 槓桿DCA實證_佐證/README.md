@@ -70,6 +70,8 @@ python cap_test.py --out cap.txt
 python tier_sgov.py --exp 0.0075 --out tier.txt
 # 同樣的規則，槓桿腳改用真實 SSO 價格（觸發與原型仍用 VT）
 python tier_sgov.py --market vt --leg-csv sso.csv --out tier_vt_sso.txt
+# 槓桿腳用「另一個指數的 2x 模型」：XS2D（2x S&P，費用 0.60%）；--exp 0.0091 可驗證模型 vs 真實 SSO
+python tier_sgov.py --market vt --leg-under spy.csv --exp 0.0060 --out tier_vt_xs2d.txt
 ```
 
 資料路徑：`matrix.py`、`cohort.py`、`cap_test.py` 的市場資料與所有腳本的 `irx.csv` 都從**腳本所在資料夾**讀取；
