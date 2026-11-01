@@ -11,6 +11,7 @@ Usage:
 """
 
 import argparse
+import math
 import os
 import sys
 
@@ -27,7 +28,7 @@ MUTED = "#898781"
 GRID = "#e1e0d9"
 AXIS = "#c3c2b7"
 BASE = "#b5b3ab"  # neutral bar for "baseline" entries
-SLOTS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100"]
+SLOTS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
 
 REGEN = "python 圖表/make_charts.py --outdir 圖表"
 
@@ -35,6 +36,7 @@ plt.rcParams.update({
     "font.family": ["Noto Sans TC", "Microsoft JhengHei", "sans-serif"],
     "font.size": 10,
     "svg.fonttype": "path",  # glyphs as outlines: renders without the font installed
+    "svg.hashsalt": "financialanalysis",  # deterministic element ids: re-runs stay diff-free
     "axes.edgecolor": AXIS,
     "axes.labelcolor": INK_2,
     "xtick.color": INK_2,
@@ -47,7 +49,7 @@ PAPER = "資料:《Beyond the Status Quo》2025-07-10 版"
 CHARTS = {
     # ---------- files 0, 1 ----------
     "allocation_main": dict(
-        kind="barh",
+        kind="pie",
         title="我的投資組合(2026)",
         labels=["VWRA / VALU", "AVGS", "IBIT(比特幣)", "0050 連結基金", "SGOV(短債)"],
         values=[52, 13, 13, 12, 10],
@@ -55,7 +57,7 @@ CHARTS = {
         source="檔 1〈我的實際配置〉",
     ),
     "allocation_parents": dict(
-        kind="barh",
+        kind="pie",
         title="父母退休組合(另有 2 年生活費的台幣安全金)",
         labels=["VWRA", "0050 連結基金", "IB01(短債)", "IBIT(比特幣)"],
         values=[50, 25, 20, 5],
@@ -312,6 +314,18 @@ def _line(ax, x, y, xlabel, ylabel, fmt):
     ax.set_axisbelow(True)
 
 
+def _pie(ax, labels, values, fmt):
+    wedges, _ = ax.pie(values, colors=SLOTS[:len(values)], startangle=90, counterclock=False,
+                       wedgeprops=dict(width=0.42, edgecolor=SURFACE, linewidth=2))
+    for w, label, v in zip(wedges, labels, values):
+        ang = math.radians((w.theta1 + w.theta2) / 2)
+        x, y = math.cos(ang), math.sin(ang)
+        ax.annotate(f"{label}  {fmt.format(v)}", xy=(0.79 * x, 0.79 * y), xytext=(1.22 * x, 1.18 * y),
+                    ha="left" if x >= 0 else "right", va="center", color=INK, fontsize=10,
+                    arrowprops=dict(arrowstyle="-", color=MUTED, linewidth=0.8))
+    ax.set_aspect("equal")
+
+
 def render(name, spec, outdir, fmt="svg"):
     kind = spec["kind"]
     if kind == "panels":
@@ -326,12 +340,14 @@ def render(name, spec, outdir, fmt="svg"):
             ax.set_title(p["title"], fontsize=10, color=INK, loc="left")
         top = 1 - 0.32 / (2.0 * rows + 0.9)
     else:
-        height = {"barh": 0.5 * len(spec.get("labels", [])) + 1.3,
+        height = {"pie": 4.2, "barh": 0.5 * len(spec.get("labels", [])) + 1.3,
                   "stacked": 0.6 * len(spec.get("labels", [])) + 1.8,
                   "grouped": 3.6, "line": 3.4}[kind]
         fig, ax = plt.subplots(figsize=(7.2, height), facecolor=SURFACE)
         _style(ax)
-        if kind == "barh":
+        if kind == "pie":
+            _pie(ax, spec["labels"], spec["values"], spec["fmt"])
+        elif kind == "barh":
             _barh(ax, spec["labels"], spec["values"], fmt=spec.get("fmt"),
                   value_labels=spec.get("value_labels"), highlight=spec.get("highlight"),
                   refline=spec.get("refline"))

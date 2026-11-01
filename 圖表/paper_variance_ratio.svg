@@ -45,7 +45,7 @@ L 163.822648 101.22058
 L 163.822648 73.387568 
 L 49.46 73.387568 
 z
-" clip-path="url(#p3d84935516)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p50e9eca618)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 49.46 147.608932 
@@ -53,7 +53,7 @@ L 400.172121 147.608932
 L 400.172121 119.77592 
 L 49.46 119.77592 
 z
-" clip-path="url(#p3d84935516)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p50e9eca618)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="ytick_1">
@@ -705,7 +705,7 @@ z
    <g id="line2d_3">
     <path d="M 201.943531 151.32 
 L 201.943531 69.6765 
-" clip-path="url(#p3d84935516)" style="fill: none; stroke: #898781; stroke-linecap: square"/>
+" clip-path="url(#p50e9eca618)" style="fill: none; stroke: #898781; stroke-linecap: square"/>
    </g>
    <g id="patch_5">
     <path d="M 49.46 151.32 
@@ -2941,7 +2941,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p3d84935516">
+  <clipPath id="p50e9eca618">
    <rect x="49.46" y="69.6765" width="462.94" height="81.6435"/>
   </clipPath>
  </defs>

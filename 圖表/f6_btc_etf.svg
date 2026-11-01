@@ -45,7 +45,7 @@ L 119.934545 95.482238
 L 119.934545 68.192727 
 L 30.38 68.192727 
 z
-" clip-path="url(#p0cab42e909)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p754468c115)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
     <path d="M 30.38 140.964755 
@@ -53,7 +53,7 @@ L 149.786061 140.964755
 L 149.786061 113.675245 
 L 30.38 113.675245 
 z
-" clip-path="url(#p0cab42e909)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p754468c115)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 30.38 186.447273 
@@ -61,7 +61,7 @@ L 179.637576 186.447273
 L 179.637576 159.157762 
 L 30.38 159.157762 
 z
-" clip-path="url(#p0cab42e909)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p754468c115)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="ytick_1">
@@ -749,7 +749,7 @@ L 268.668091 95.482238
 L 268.668091 68.192727 
 L 257.78 68.192727 
 z
-" clip-path="url(#pbf30ab2566)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p2e4947a4bd)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_9">
     <path d="M 257.78 140.964755 
@@ -757,7 +757,7 @@ L 264.131386 140.964755
 L 264.131386 113.675245 
 L 257.78 113.675245 
 z
-" clip-path="url(#pbf30ab2566)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p2e4947a4bd)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="patch_10">
     <path d="M 257.78 186.447273 
@@ -765,7 +765,7 @@ L 407.037576 186.447273
 L 407.037576 159.157762 
 L 257.78 159.157762 
 z
-" clip-path="url(#pbf30ab2566)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
+" clip-path="url(#p2e4947a4bd)" style="fill: #2a78d6; stroke: #fcfcfb; stroke-width: 2; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_2">
     <g id="ytick_4">
@@ -3095,10 +3095,10 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p0cab42e909">
+  <clipPath id="p754468c115">
    <rect x="30.38" y="62.28" width="197.02" height="130.08"/>
   </clipPath>
-  <clipPath id="pbf30ab2566">
+  <clipPath id="p2e4947a4bd">
    <rect x="257.78" y="62.28" width="197.02" height="130.08"/>
   </clipPath>
  </defs>
