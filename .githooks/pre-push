@@ -1,0 +1,10 @@
+#!/bin/sh
+# Pre-push privacy gate (see privacy_check.py).
+# Enable once per clone: git config core.hooksPath .githooks
+for py in python python3 py; do
+  if command -v "$py" >/dev/null 2>&1; then
+    exec "$py" "$(dirname "$0")/privacy_check.py" --remote "$1"
+  fi
+done
+echo "privacy-check: no Python found; push blocked (bypass deliberately with --no-verify)" >&2
+exit 1
